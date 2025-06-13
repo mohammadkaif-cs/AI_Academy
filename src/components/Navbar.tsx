@@ -1,17 +1,20 @@
 
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsOpen(false);
-  };
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Courses", path: "/courses" },
+    { name: "AI Skill Assessment", path: "/assessment" },
+    { name: "Readiness Test", path: "/readiness-test" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
@@ -19,31 +22,30 @@ export const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <button
-              onClick={() => scrollToSection("home")}
+            <Link
+              to="/"
               className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
               AI Academy by AK
-            </button>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {[
-                { name: "Home", id: "home" },
-                { name: "About Us", id: "about" },
-                { name: "Courses", id: "courses" },
-                { name: "Assessments", id: "assessments" },
-                { name: "Contact", id: "contact" },
-              ].map((item) => (
-                <button
+              {navItems.map((item) => (
+                <Link
                   key={item.name}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  to={item.path}
+                  className={cn(
+                    "px-3 py-2 text-sm font-medium transition-colors duration-200",
+                    location.pathname === item.path
+                      ? "text-blue-600 border-b-2 border-blue-600"
+                      : "text-gray-700 hover:text-blue-600"
+                  )}
                 >
                   {item.name}
-                </button>
+                </Link>
               ))}
             </div>
           </div>
@@ -82,20 +84,20 @@ export const Navbar = () => {
         {/* Mobile Navigation */}
         <div className={cn("md:hidden", isOpen ? "block" : "hidden")}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {[
-              { name: "Home", id: "home" },
-              { name: "About Us", id: "about" },
-              { name: "Courses", id: "courses" },
-              { name: "Assessments", id: "assessments" },
-              { name: "Contact", id: "contact" },
-            ].map((item) => (
-              <button
+            {navItems.map((item) => (
+              <Link
                 key={item.name}
-                onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200 w-full text-left"
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className={cn(
+                  "block px-3 py-2 text-base font-medium transition-colors duration-200 w-full text-left",
+                  location.pathname === item.path
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                )}
               >
                 {item.name}
-              </button>
+              </Link>
             ))}
           </div>
         </div>
