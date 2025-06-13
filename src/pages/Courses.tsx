@@ -1,9 +1,11 @@
-
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, Users, Clock, Award } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { Chatbot } from "@/components/Chatbot";
 
 const Courses = () => {
   const courseTrack = [
@@ -77,105 +79,110 @@ const Courses = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            AI Academy Courses
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Comprehensive AI education designed by industry experts. Choose your learning path 
-            and master artificial intelligence from fundamentals to cutting-edge applications.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              <span>Self-paced learning</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Award className="w-4 h-4" />
-              <span>Industry certificates</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              <span>Expert mentorship</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Course Tracks Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courseTrack.map((track) => {
-            const IconComponent = track.icon;
-            return (
-              <Card key={track.id} className="hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-gray-100 rounded-lg">
-                        <IconComponent className="w-6 h-6 text-gray-700" />
-                      </div>
-                      <Badge className={track.color}>{track.level}</Badge>
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl mb-2">{track.title}</CardTitle>
-                  <CardDescription className="text-base text-gray-600">
-                    {track.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="pt-0">
-                  <div className="flex justify-between text-sm text-gray-500 mb-6">
-                    <span>{track.courses} courses</span>
-                    <span>{track.duration}</span>
-                  </div>
-                  
-                  <Link to={track.path}>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                      Explore Track
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Learning Path Section */}
-        <div className="mt-20 bg-white rounded-2xl p-8 shadow-lg">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-            Recommended Learning Path
-          </h2>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            {[
-              { step: 1, title: "Start with Assessment", desc: "Take our AI Skill Assessment" },
-              { step: 2, title: "Choose Your Track", desc: "Based on your results and goals" }, 
-              { step: 3, title: "Learn & Practice", desc: "Hands-on projects and real examples" },
-              { step: 4, title: "Get Certified", desc: "Earn industry-recognized credentials" }
-            ].map((item, index) => (
-              <div key={item.step} className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-3">
-                  {item.step}
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
-                <p className="text-sm text-gray-600 max-w-32">{item.desc}</p>
-                {index < 3 && (
-                  <ArrowRight className="w-6 h-6 text-gray-400 mt-4 hidden md:block absolute md:relative md:ml-8" />
-                )}
+      <Navbar />
+      <div className="pt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              AI Academy Courses
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Comprehensive AI education designed by industry experts. Choose your learning path 
+              and master artificial intelligence from fundamentals to cutting-edge applications.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                <span>Self-paced learning</span>
               </div>
-            ))}
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4" />
+                <span>Industry certificates</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                <span>Expert mentorship</span>
+              </div>
+            </div>
           </div>
-          
-          <div className="text-center mt-8">
-            <Link to="/assessment">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8">
-                Start Your AI Journey
-              </Button>
-            </Link>
+
+          {/* Course Tracks Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {courseTrack.map((track) => {
+              const IconComponent = track.icon;
+              return (
+                <Card key={track.id} className="hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-gray-100 rounded-lg">
+                          <IconComponent className="w-6 h-6 text-gray-700" />
+                        </div>
+                        <Badge className={track.color}>{track.level}</Badge>
+                      </div>
+                    </div>
+                    <CardTitle className="text-xl mb-2">{track.title}</CardTitle>
+                    <CardDescription className="text-base text-gray-600">
+                      {track.description}
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent className="pt-0">
+                    <div className="flex justify-between text-sm text-gray-500 mb-6">
+                      <span>{track.courses} courses</span>
+                      <span>{track.duration}</span>
+                    </div>
+                    
+                    <Link to={track.path}>
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                        Explore Track
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Learning Path Section */}
+          <div className="mt-20 bg-white rounded-2xl p-8 shadow-lg">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+              Recommended Learning Path
+            </h2>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              {[
+                { step: 1, title: "Start with Assessment", desc: "Take our AI Skill Assessment" },
+                { step: 2, title: "Choose Your Track", desc: "Based on your results and goals" }, 
+                { step: 3, title: "Learn & Practice", desc: "Hands-on projects and real examples" },
+                { step: 4, title: "Get Certified", desc: "Earn industry-recognized credentials" }
+              ].map((item, index) => (
+                <div key={item.step} className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mb-3">
+                    {item.step}
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+                  <p className="text-sm text-gray-600 max-w-32">{item.desc}</p>
+                  {index < 3 && (
+                    <ArrowRight className="w-6 h-6 text-gray-400 mt-4 hidden md:block absolute md:relative md:ml-8" />
+                  )}
+                </div>
+              ))}
+            </div>
+            
+            <div className="text-center mt-8">
+              <Link to="/assessment">
+                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8">
+                  Start Your AI Journey
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
+      <Chatbot />
     </div>
   );
 };
