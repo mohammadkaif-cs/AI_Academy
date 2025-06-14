@@ -1,7 +1,5 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Chatbot } from "@/components/Chatbot";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -209,7 +207,6 @@ const Index = () => {
       </section>
 
       <Footer />
-      <Chatbot />
     </div>
   );
 };

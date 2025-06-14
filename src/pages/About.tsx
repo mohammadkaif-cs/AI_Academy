@@ -1,7 +1,5 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Chatbot } from "@/components/Chatbot";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Target, Users, Award, Lightbulb, BookOpen, Brain } from "lucide-react";
 
@@ -201,7 +199,6 @@ const About = () => {
       </div>
 
       <Footer />
-      <Chatbot />
     </div>
   );
 };
