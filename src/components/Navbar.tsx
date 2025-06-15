@@ -54,16 +54,13 @@ export const Navbar = () => {
                     key={item.name}
                     to={item.path}
                     className={cn(
-                      "px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md relative",
+                      "px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md",
                       location.pathname === item.path
                         ? "text-blue-600 bg-blue-50"
                         : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                     )}
                   >
                     {item.name}
-                    {location.pathname === item.path && (
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></div>
-                    )}
                   </Link>
                 ))}
               </div>
