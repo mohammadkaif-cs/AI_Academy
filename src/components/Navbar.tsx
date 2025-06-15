@@ -29,14 +29,14 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
               to="/"
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-2xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent"
             >
               AI Academy by AK
             </Link>
@@ -52,8 +52,8 @@ export const Navbar = () => {
                   className={cn(
                     "px-3 py-2 text-sm font-medium transition-colors duration-200",
                     location.pathname === item.path
-                      ? "text-blue-600 border-b-2 border-blue-600"
-                      : "text-gray-700 hover:text-blue-600"
+                      ? "text-white border-b-2 border-gray-400"
+                      : "text-gray-300 hover:text-white"
                   )}
                 >
                   {item.name}
@@ -67,19 +67,19 @@ export const Navbar = () => {
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link to="/dashboard">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white hover:bg-gray-800">
                     <User className="w-4 h-4 mr-2" />
                     Dashboard
                   </Button>
                 </Link>
-                <Button onClick={handleLogout} variant="outline" size="sm">
+                <Button onClick={handleLogout} variant="outline" size="sm" className="border-gray-600 text-gray-300 hover:text-white hover:bg-gray-800">
                   <LogOut className="w-4 h-4 mr-2" />
                   Logout
                 </Button>
               </div>
             ) : (
               <Link to="/auth">
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                <Button size="sm" className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white">
                   Sign In
                 </Button>
               </Link>
@@ -90,7 +90,7 @@ export const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600"
+              className="text-gray-300 hover:text-white focus:outline-none focus:text-white"
             >
               <svg
                 className="h-6 w-6"
@@ -119,17 +119,17 @@ export const Navbar = () => {
 
         {/* Mobile Navigation */}
         <div className={cn("md:hidden", isOpen ? "block" : "hidden")}>
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  "block px-3 py-2 text-base font-medium transition-colors duration-200 w-full text-left",
+                  "block px-3 py-2 text-base font-medium transition-colors duration-200 w-full text-left rounded-md",
                   location.pathname === item.path
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    ? "text-white bg-gray-800"
+                    : "text-gray-300 hover:text-white hover:bg-gray-800"
                 )}
               >
                 {item.name}
@@ -137,13 +137,13 @@ export const Navbar = () => {
             ))}
             
             {/* Mobile Auth */}
-            <div className="pt-4 border-t border-gray-200">
+            <div className="pt-4 border-t border-gray-800">
               {user ? (
                 <div className="space-y-2">
                   <Link
                     to="/dashboard"
                     onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
                   >
                     Dashboard
                   </Link>
@@ -152,7 +152,7 @@ export const Navbar = () => {
                       handleLogout();
                       setIsOpen(false);
                     }}
-                    className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
                   >
                     Logout
                   </button>
@@ -161,7 +161,7 @@ export const Navbar = () => {
                 <Link
                   to="/auth"
                   onClick={() => setIsOpen(false)}
-                  className="block px-3 py-2 text-base font-medium bg-blue-600 text-white rounded-md text-center"
+                  className="block px-3 py-2 text-base font-medium bg-gradient-to-r from-gray-600 to-gray-800 text-white rounded-md text-center"
                 >
                   Sign In
                 </Link>
