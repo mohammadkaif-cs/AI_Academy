@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,76 +20,99 @@ import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import * as session from "@/utils/session";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/auth" element={<Auth />} />
-            {/* Public routes - accessible to everyone */}
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/courses" element={<Courses />} />
-            
-            {/* Protected routes - require authentication for actual course content */}
-            <Route path="/courses/beginner" element={
-              <ProtectedRoute>
-                <BeginnerTrack />
-              </ProtectedRoute>
-            } />
-            <Route path="/courses/intermediate" element={
-              <ProtectedRoute>
-                <IntermediateTrack />
-              </ProtectedRoute>
-            } />
-            <Route path="/courses/advanced" element={
-              <ProtectedRoute>
-                <AdvancedTrack />
-              </ProtectedRoute>
-            } />
-            <Route path="/courses/generative-ai" element={
-              <ProtectedRoute>
-                <GenerativeAI />
-              </ProtectedRoute>
-            } />
-            <Route path="/courses/nlp" element={
-              <ProtectedRoute>
-                <NLP />
-              </ProtectedRoute>
-            } />
-            <Route path="/courses/computer-vision" element={
-              <ProtectedRoute>
-                <ComputerVision />
-              </ProtectedRoute>
-            } />
-            <Route path="/assessment" element={
-              <ProtectedRoute>
-                <Assessment />
-              </ProtectedRoute>
-            } />
-            <Route path="/readiness-test" element={
-              <ProtectedRoute>
-                <ReadinessTest />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Track last visited path except for /auth or public pages
+  useEffect(() => {
+    const ignore = ["/auth", "/"];
+    const handler = () => {
+      const { pathname } = window.location;
+      if (!ignore.includes(pathname)) {
+        session.saveLastVisited(pathname);
+      }
+    };
+    window.addEventListener("popstate", handler);
+    window.addEventListener("pushstate", handler); // for custom navigation
+    // Call on first mount
+    handler();
+    return () => {
+      window.removeEventListener("popstate", handler);
+      window.removeEventListener("pushstate", handler);
+    };
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/auth" element={<Auth />} />
+              {/* Public routes - accessible to everyone */}
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/courses" element={<Courses />} />
+              
+              {/* Protected routes - require authentication for actual course content */}
+              <Route path="/courses/beginner" element={
+                <ProtectedRoute>
+                  <BeginnerTrack />
+                </ProtectedRoute>
+              } />
+              <Route path="/courses/intermediate" element={
+                <ProtectedRoute>
+                  <IntermediateTrack />
+                </ProtectedRoute>
+              } />
+              <Route path="/courses/advanced" element={
+                <ProtectedRoute>
+                  <AdvancedTrack />
+                </ProtectedRoute>
+              } />
+              <Route path="/courses/generative-ai" element={
+                <ProtectedRoute>
+                  <GenerativeAI />
+                </ProtectedRoute>
+              } />
+              <Route path="/courses/nlp" element={
+                <ProtectedRoute>
+                  <NLP />
+                </ProtectedRoute>
+              } />
+              <Route path="/courses/computer-vision" element={
+                <ProtectedRoute>
+                  <ComputerVision />
+                </ProtectedRoute>
+              } />
+              <Route path="/assessment" element={
+                <ProtectedRoute>
+                  <Assessment />
+                </ProtectedRoute>
+              } />
+              <Route path="/readiness-test" element={
+                <ProtectedRoute>
+                  <ReadinessTest />
+                </ProtectedRoute>
+              } />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
