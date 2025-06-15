@@ -148,3 +148,48 @@
     appearance: none;
   }
 }
+
+/* Ensure buttons maintain good text contrast on hover and in all states sitewide. */
+button, .btn, .shadcn-btn {
+  transition: color 0.2s, background-color 0.2s;
+}
+
+/* Common hover state for primary button style */
+.bg-blue-600:hover, .bg-blue-700:hover {
+  color: #fff !important;
+}
+
+/* Common utility for "border-2 border-blue-600"-styled buttons */
+.border-blue-600:hover {
+  background-color: #2563eb !important; /* Tailwind blue-600 */
+  color: #fff !important;
+}
+
+/* Add this for all outline/ghost styled .btn or button */
+button:hover, .btn:hover, .shadcn-btn:hover {
+  /* Ensure text does not become transparent or blend with bg */
+  color: inherit;
+  text-shadow: none;
+}
+
+/* Fix explicit .hover:bg-white or .hover:bg-transparent cases to keep text readable */
+.hover\:bg-white:hover, .hover\:bg-transparent:hover {
+  color: #1e293b !important; /* slate-800, good for light bg */
+}
+
+@layer components {
+  /* New: Glowing focus ring */
+  .focus-glow {
+    box-shadow: 0 0 0 2px hsl(var(--glow)), 0 0 16px 1px hsl(var(--glow)/0.25) !important;
+  }
+  /* Card accent shadow (primary blue) */
+  .card-glow {
+    box-shadow: 0 2px 20px 0 hsl(var(--glow)/0.15), 0 0 0 1.5px hsl(var(--glow)/0.6);
+  }
+  .card-glow-accent {
+    box-shadow: 0 2px 16px 0 hsl(var(--glow-secondary)/0.13), 0 0 0 1.5px hsl(var(--glow-secondary)/0.45);
+  }
+  .sidebar-glow {
+    box-shadow: 4px 0 16px 0 hsl(var(--glow)/0.12);
+  }
+}
