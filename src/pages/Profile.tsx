@@ -1,11 +1,12 @@
 
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 import ProfileBackToDashboardButton from "@/components/profile/ProfileBackToDashboardButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import ProfileEditor from "@/components/profile/ProfileEditor";
 
 const LOCAL_PROFILE_KEY = "user_profile_data";
 
@@ -25,6 +26,7 @@ interface ProfileData {
 export default function ProfilePage() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [profile, setProfile] = useState<ProfileData>({
     fullName: "",
     bio: "",
@@ -38,7 +40,6 @@ export default function ProfilePage() {
     resumeName: "",
   });
 
-  // Load from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(LOCAL_PROFILE_KEY);
     if (saved) {
@@ -52,6 +53,13 @@ export default function ProfilePage() {
       }));
     }
   }, [user]);
+
+  // Check which view to render based on location.pathname
+  const editing = location.pathname === "/profile/edit";
+
+  if (editing) {
+    return <ProfileEditor />;
+  }
 
   const {
     fullName,
@@ -145,7 +153,7 @@ export default function ProfilePage() {
         <Button
           variant="outline"
           className="rounded-full px-7 py-2 font-semibold mt-3 shadow bg-white/15 backdrop-blur text-foreground border border-white/20 hover:bg-white/30 transition-all"
-          onClick={() => navigate("/profile?edit=true")}
+          onClick={() => navigate("/profile/edit")}
         >
           Edit Profile
         </Button>
