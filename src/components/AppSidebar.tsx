@@ -28,8 +28,6 @@ const sidebarLinks = [
   { title: "Home", to: "/", icon: HomeIcon },
   { title: "Courses", to: "/courses", icon: BookIcon },
   { title: "Dashboard", to: "/dashboard", icon: DashboardIcon },
-  { title: "Tutorials", to: "/courses/beginner", icon: TutorialsIcon },
-  { title: "Case Studies", to: "/courses/advanced", icon: CaseStudiesIcon },
   { title: "Chatbot", to: "/chatbot", icon: ChatbotIcon },
 ];
 
