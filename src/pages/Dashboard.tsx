@@ -1,10 +1,9 @@
-
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Award, TrendingUp, Zap, Send, Bot, Star } from 'lucide-react'; // Added Star
+import { BookOpen, Award, TrendingUp, Zap, Send, Bot, Star } from 'lucide-react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RTooltip } from 'recharts';
 import { useAuth } from '@/contexts/AuthContext';
-import React, { useEffect, useState } from 'react'; // Added useState/useEffect
+import React, { useEffect, useState } from 'react';
 
 const statsData = [
   { name: 'Courses', value: 3 },
@@ -58,8 +57,8 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        {/* Stats row */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+        {/* Stats row: removed Progress card, now 3 columns */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {/* Card 1 */}
           <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
             <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
@@ -82,32 +81,7 @@ export default function Dashboard() {
               <div className="text-xs text-green-200 mt-1 font-semibold">Beginner AI completed</div>
             </CardContent>
           </Card>
-          {/* Progress/Chart */}
-          <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
-            <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
-              <CardTitle className="text-base font-semibold text-cyan-200 tracking-wide">Progress</CardTitle>
-              <TrendingUp className="h-7 w-7 text-cyan-200 drop-shadow-glow" />
-            </CardHeader>
-            <CardContent className="px-6 pb-6 pt-1">
-              <div className="flex items-end gap-6">
-                <div>
-                  <div className="text-[2rem] sm:text-[2.4rem] font-black text-white">67%</div>
-                  <div className="text-xs text-cyan-200 mt-1 font-semibold">Overall completion</div>
-                </div>
-                <div className="flex-1 min-w-[90px]">
-                  <ResponsiveContainer width="100%" height={42}>
-                    <BarChart data={statsData} barSize={12}>
-                      <XAxis dataKey="name" hide />
-                      <YAxis hide />
-                      <Bar dataKey="value" fill="#8ff8ff" radius={[4, 4, 0, 0]} />
-                      <RTooltip cursor={{ fill: "#232939" }} />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          {/* Best Score Card (NEW, 4th card) */}
+          {/* Best Score Card */}
           <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
             <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
               <CardTitle className="text-base font-semibold text-yellow-300 tracking-wide">Best Assessment Score</CardTitle>
