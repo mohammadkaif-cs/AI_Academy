@@ -17,12 +17,25 @@ export default function ProfileHeader({
   bio,
   role,
   photoUrl,
-  onEdit,
+  onEdit
 }: ProfileHeaderProps) {
   return (
-    <div className="flex flex-col md:flex-row items-center gap-4 justify-between bg-card rounded-xl shadow-glow px-6 py-6 md:py-8 mb-4">
+    <div
+      className="
+        relative flex flex-col md:flex-row items-center gap-6 justify-between
+        rounded-2xl shadow-xl px-8 py-8 mb-6
+        bg-white/10 backdrop-blur-md
+        border border-white/20
+        ring-1 ring-inset ring-white/30
+        glassmorphism-profile-card
+        "
+      style={{
+        // For subtle extra-glass
+        boxShadow: "0 4px 32px 0 rgba(30,44,80,0.11), 0 1.5px 0px 0px hsl(var(--glow)/0.38)"
+      }}
+    >
       <div className="flex items-center gap-5">
-        <Avatar className="h-20 w-20 shadow-md">
+        <Avatar className="h-24 w-24 shadow-lg ring-2 ring-white/40 transition-all">
           {photoUrl ? (
             <AvatarImage src={photoUrl} alt="Profile Photo" />
           ) : (
@@ -32,24 +45,32 @@ export default function ProfileHeader({
           )}
         </Avatar>
         <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold">{fullName || "Your Name"}</h2>
-            <span className="ml-2 px-2 rounded bg-muted text-xs text-muted-foreground font-semibold">
+          <div className="flex items-center gap-3">
+            <h2 className="text-2xl sm:text-3xl font-bold drop-shadow select-text">{fullName || "Your Name"}</h2>
+            <span className="ml-2 px-3 py-1 rounded-full bg-white/20 text-accent text-xs font-semibold backdrop-blur-md border border-white/10">
               {role}
             </span>
           </div>
           {bio && (
-            <div className="mt-1 text-base text-muted-foreground max-w-prose">
+            <div className="mt-2 text-base text-muted-foreground max-w-prose select-text">
               {bio}
             </div>
           )}
         </div>
       </div>
-      <div className="mt-4 md:mt-0">
-        <Button variant="outline" onClick={onEdit}>
+      <div className="mt-4 md:mt-0 flex-shrink-0">
+        <Button
+          variant="outline"
+          onClick={onEdit}
+          className="rounded-full px-6 py-2 shadow-md bg-white/15 backdrop-blur text-foreground border border-white/30 hover:bg-white/30 transition-all"
+          style={{
+            boxShadow: "0 4px 16px 0 hsl(var(--glow)/0.10), 0 0 0 0.5px hsl(var(--glow)/0.82)"
+          }}
+        >
           Edit Profile
         </Button>
       </div>
     </div>
   );
 }
+

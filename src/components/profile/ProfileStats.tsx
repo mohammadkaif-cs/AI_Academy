@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Award, Folder, User as UserIcon, Star } from "lucide-react";
+import { Award, Folder, User as UserIcon } from "lucide-react";
 
 interface Stat {
   label: string;
@@ -44,19 +44,32 @@ export default function ProfileStats({
     }
   ];
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 mb-4 w-full">
       {stats.map(stat => (
         <div
           key={stat.label}
-          className="flex flex-col items-center bg-card rounded-lg px-0 py-4 shadow-glow"
+          className="
+            flex flex-col items-center justify-center
+            bg-white/10 backdrop-blur-xl
+            rounded-xl px-0 py-6
+            ring-1 ring-inset ring-white/20
+            shadow-glow
+            transition-transform hover:scale-105 hover:shadow-xl
+            border border-white/10
+            glassmorphism-glow-card
+          "
+          style={{
+            boxShadow: "0 0px 16px 0px hsl(var(--glow)/0.18), 0 0 5px 0px hsl(var(--accent)/0.13)"
+          }}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-1">
             {stat.icon}
-            <span className="text-xl font-semibold">{stat.value}</span>
+            <span className="text-2xl font-semibold drop-shadow">{stat.value}</span>
           </div>
-          <span className="text-xs text-muted-foreground mt-1">{stat.label}</span>
+          <span className="text-xs text-muted-foreground mt-0.5 tracking-wide">{stat.label}</span>
         </div>
       ))}
     </div>
   );
 }
+
