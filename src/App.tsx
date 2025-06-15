@@ -66,10 +66,10 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {/* AuthProvider wraps BrowserRouter so context is always present */}
-        <AuthProvider>
-          <AuthGate>
-            <BrowserRouter>
+        {/* Move BrowserRouter up so AuthProvider gets Router context */}
+        <BrowserRouter>
+          <AuthProvider>
+            <AuthGate>
               <Routes>
                 <Route path="/auth" element={<Auth />} />
                 {/* Public routes */}
@@ -126,9 +126,9 @@ const App = () => {
                 } />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
-          </AuthGate>
-        </AuthProvider>
+            </AuthGate>
+          </AuthProvider>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );
