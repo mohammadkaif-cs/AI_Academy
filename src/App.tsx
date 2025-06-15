@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import Chatbot from "./pages/Chatbot";
 import Profile from "./pages/Profile"; // ADD THIS
 import SkillAssessmentTest from "./pages/assessment/SkillAssessmentTest";
+import Projects from "./pages/Projects";
 
 // Now BrowserRouter is wrapped in AuthProvider
 
@@ -139,6 +140,11 @@ const App = () => {
                 <Route path="/profile" element={
                   <ProtectedRoute>
                     <Profile />
+                  </ProtectedRoute>
+                } />
+                <Route path="/projects" element={
+                  <ProtectedRoute>
+                    <Projects />
                   </ProtectedRoute>
                 } />
                 <Route path="*" element={<NotFound />} />
