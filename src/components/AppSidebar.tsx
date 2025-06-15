@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
@@ -13,8 +14,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
+  Home as HomeIcon,
+  Book as BookIcon,
   LayoutDashboard as DashboardIcon,
-  BookOpen as CoursesIcon,
   Video as TutorialsIcon,
   Briefcase as CaseStudiesIcon,
   MessageCircle as ChatbotIcon,
@@ -22,10 +24,11 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/* Vibrant accent for the sidebar, tech-style nav */
+/* Sidebar links with Home and Courses at the top for easy navigation */
 const sidebarLinks = [
+  { title: "Home", to: "/dashboard", icon: HomeIcon },
+  { title: "Courses", to: "/courses", icon: BookIcon },
   { title: "Dashboard", to: "/dashboard", icon: DashboardIcon },
-  { title: "Courses", to: "/courses", icon: CoursesIcon },
   { title: "Tutorials", to: "/courses/beginner", icon: TutorialsIcon },
   { title: "Case Studies", to: "/courses/advanced", icon: CaseStudiesIcon },
   { title: "Chatbot", to: "/chatbot", icon: ChatbotIcon },
@@ -45,7 +48,7 @@ export function AppSidebar() {
         "sidebar-glow border-r border-[hsl(var(--sidebar-border))] bg-[hsl(var(--sidebar-background))] transition-all duration-300",
         state === "collapsed" ? "w-16" : "w-64"
       )}
-      collapsible="icon" // FIXED: pass the correct string value, not boolean
+      collapsible="icon"
     >
       <div className="flex items-center justify-between px-4 h-16 border-b border-[hsl(var(--sidebar-border))]">
         <span className={cn(
@@ -64,7 +67,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {sidebarLinks.map(link => (
-                <SidebarMenuItem key={link.title}>
+                <SidebarMenuItem key={link.title + link.to}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={link.to}
@@ -73,14 +76,18 @@ export function AppSidebar() {
                           "flex items-center gap-3 px-4 py-2.5 my-0.5 font-medium rounded-lg transition outline-none",
                           "hover:bg-gradient-to-r hover:from-[#2e4562]/70 hover:to-[#2fffdc]/10 hover:text-[#44deff] focus-glow",
                           "active:scale-[.98]",
-                          (isActive(link.to) || navIsActive) ? "bg-gradient-to-r from-blue-700 to-cyan-600/90 text-white shadow-lg card-glow" : "text-[hsl(var(--sidebar-foreground))]/90"
+                          (isActive(link.to) || navIsActive)
+                            ? "bg-gradient-to-r from-blue-700 to-cyan-600/90 text-white shadow-lg card-glow"
+                            : "text-[hsl(var(--sidebar-foreground))]/90"
                         )
                       }
                     >
                       <link.icon
                         className={cn(
                           "w-5 h-5 transition",
-                          (isActive(link.to) || currentPath.startsWith(link.to)) ? "text-accent drop-shadow-[0_0_4px_rgba(79,255,255,0.60)]" : "text-blue-300"
+                          (isActive(link.to) || currentPath.startsWith(link.to))
+                            ? "text-accent drop-shadow-[0_0_4px_rgba(79,255,255,0.60)]"
+                            : "text-blue-300"
                         )}
                       />
                       {state !== "collapsed" && <span className="tracking-wide">{link.title}</span>}
@@ -110,3 +117,4 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
