@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
@@ -19,7 +18,6 @@ import {
   Video as TutorialsIcon,
   Briefcase as CaseStudiesIcon,
   MessageCircle as ChatbotIcon,
-  Settings as SettingsIcon,
   LogOut as LogoutIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,7 +29,6 @@ const sidebarLinks = [
   { title: "Tutorials", to: "/courses/beginner", icon: TutorialsIcon },
   { title: "Case Studies", to: "/courses/advanced", icon: CaseStudiesIcon },
   { title: "Chatbot", to: "/chatbot", icon: ChatbotIcon },
-  { title: "Settings", to: "/settings", icon: SettingsIcon },
 ];
 
 export function AppSidebar() {
@@ -113,4 +110,3 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
-
