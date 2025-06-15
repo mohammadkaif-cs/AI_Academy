@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface ProfileData {
   fullName: string;
@@ -20,6 +21,7 @@ const LOCAL_PROFILE_KEY = "user_profile_data";
 export default function ProfilePage() {
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState<ProfileData>({
     fullName: "",
     bio: "",
@@ -74,8 +76,11 @@ export default function ProfilePage() {
       toast({
         title: "Profile saved!",
         description: "Your profile changes have been saved.",
-        duration: 2500,
+        duration: 2000,
       });
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000); // Wait for toast, then redirect
     }, 500);
   }
 
