@@ -13,6 +13,7 @@ import ProfileStats from "@/components/profile/ProfileStats";
 import ProfileTabs from "@/components/profile/ProfileTabs";
 import ProfileProjects from "@/components/profile/ProfileProjects";
 import ProfileAchievements from "@/components/profile/ProfileAchievements";
+import ProfileEditor from "@/components/profile/ProfileEditor";
 
 interface ProfileData {
   fullName: string;
@@ -161,83 +162,9 @@ export default function ProfilePage() {
             <ProfileAchievements achievements={achievements} />
           )}
           {tab === "settings" && (
-            // Edit form from previous profile (could modularize it)
-            showEdit && (
-              <div className="mt-6">
-                <form
-                  className="space-y-6"
-                  onSubmit={handleSaveProfile}
-                  autoComplete="off"
-                >
-                  <div>
-                    <label htmlFor="fullName" className="block font-medium mb-1">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      value={profile.fullName}
-                      onChange={handleChange}
-                      placeholder="Enter your name"
-                      autoComplete="name"
-                      className="mt-1 w-full bg-muted/40 px-3 py-2 rounded border border-input"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="bio" className="block font-medium mb-1">
-                      Bio
-                    </label>
-                    <textarea
-                      id="bio"
-                      name="bio"
-                      value={profile.bio}
-                      onChange={handleChange}
-                      placeholder="Tell us about yourself"
-                      maxLength={180}
-                      className="mt-1 w-full bg-muted/40 px-3 py-2 rounded border border-input"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="photo" className="block font-medium mb-1">
-                      Profile Photo
-                    </label>
-                    <input
-                      id="photo"
-                      name="photo"
-                      type="file"
-                      accept="image/*"
-                      onChange={handlePhotoChange}
-                      className="mt-1"
-                    />
-                    {photoPreview && (
-                      <img
-                        src={photoPreview}
-                        alt="Preview"
-                        className="h-16 w-16 rounded-full border border-muted mt-3"
-                      />
-                    )}
-                  </div>
-                  <div className="flex gap-3">
-                    <Button
-                      type="submit"
-                      className="w-full"
-                      disabled={saving}
-                    >
-                      {saving ? "Saving..." : "Save Profile"}
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="w-full"
-                      onClick={() => setShowEdit(false)}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </form>
-              </div>
-            )
+            <div className="mt-6">
+              <ProfileEditor />
+            </div>
           )}
         </div>
       </ProfileTabs>
