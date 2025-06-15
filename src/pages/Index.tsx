@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -67,9 +66,22 @@ const Index = () => {
                     </Button>
                   </Link>
                   <Link to="/courses">
-                    <Button size="lg" variant="outline" className="px-8 py-3 hover:scale-105 transition-all duration-200 hover:bg-blue-50 hover:border-blue-300">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="px-8 py-3 hover:scale-105 transition-all duration-200 border-blue-600 text-blue-600 hover:bg-blue-100 hover:text-blue-700 focus:ring-blue-200"
+                    >
                       <Play className="w-5 h-5 mr-2" />
                       Explore Courses
+                    </Button>
+                  </Link>
+                  <Link to="/assessment">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="px-8 py-3 border-blue-600 text-blue-600 hover:bg-blue-100 hover:text-blue-700 focus:ring-blue-200 hover:scale-105 transition-all duration-200"
+                    >
+                      Take Assessment
                     </Button>
                   </Link>
                 </div>
@@ -206,7 +218,11 @@ const Index = () => {
 
           <div className="text-center mt-12">
             <Link to="/courses">
-              <Button size="lg" variant="outline" className="hover:scale-105 transition-all duration-200 hover:bg-blue-50 hover:border-blue-300">
+              <Button
+                size="lg"
+                variant="outline"
+                className="hover:scale-105 transition-all duration-200 border-blue-600 text-blue-600 hover:bg-blue-100 hover:text-blue-700 focus:ring-blue-200"
+              >
                 View All Courses
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
