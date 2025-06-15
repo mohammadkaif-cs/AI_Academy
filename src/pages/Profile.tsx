@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/components/ui/use-toast";
 
 interface ProfileData {
   fullName: string;
@@ -18,6 +19,7 @@ const LOCAL_PROFILE_KEY = "user_profile_data";
 
 export default function ProfilePage() {
   const { user } = useAuth();
+  const { toast } = useToast();
   const [profile, setProfile] = useState<ProfileData>({
     fullName: "",
     bio: "",
@@ -69,6 +71,11 @@ export default function ProfilePage() {
     setTimeout(() => {
       localStorage.setItem(LOCAL_PROFILE_KEY, JSON.stringify(profile));
       setSaving(false);
+      toast({
+        title: "Profile saved!",
+        description: "Your profile changes have been saved.",
+        duration: 2500,
+      });
     }, 500);
   }
 
@@ -94,17 +101,18 @@ export default function ProfilePage() {
               )}
             </Avatar>
             <div>
-              <div className="text-lg">
+              <div className="text-lg font-semibold">
                 {profile.fullName || user?.displayName || "Your Name"}
               </div>
-              <CardDescription className="mt-1">
-                {user?.email}
-              </CardDescription>
+              <CardDescription className="mt-1">{user?.email}</CardDescription>
+              {profile.bio && (
+                <div className="mt-1 text-sm text-muted-foreground">{profile.bio}</div>
+              )}
             </div>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form className="space-y-6" onSubmit={handleSaveProfile}>
+          <form className="space-y-6" onSubmit={handleSaveProfile} autoComplete="off">
             <div>
               <Label htmlFor="fullName">Full Name</Label>
               <Input
