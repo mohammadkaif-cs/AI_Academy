@@ -1,12 +1,16 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Users, Award, Brain, Target, TrendingUp } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { ArrowRight, BookOpen, Users, Award, Brain, Target, TrendingUp, User } from "lucide-react";
 
 const Index = () => {
+  const { user } = useAuth();
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -24,10 +28,24 @@ const Index = () => {
               we'll guide you through every step of your artificial intelligence journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              {user ? (
+                <Link to="/dashboard">
+                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8">
+                    <User className="w-5 h-5 mr-2" />
+                    Go to Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/auth">
+                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8">
+                    Get Started - Sign Up
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </Link>
+              )}
               <Link to="/assessment">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8">
+                <Button size="lg" variant="outline" className="px-8">
                   Take Free AI Assessment
-                  <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
               <Link to="/courses">
@@ -192,8 +210,21 @@ const Index = () => {
             Join thousands of professionals who have transformed their careers with our AI education platform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {user ? (
+              <Link to="/dashboard">
+                <Button size="lg" variant="secondary" className="px-8">
+                  Continue Learning
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/auth">
+                <Button size="lg" variant="secondary" className="px-8">
+                  Sign Up Now
+                </Button>
+              </Link>
+            )}
             <Link to="/assessment">
-              <Button size="lg" variant="secondary" className="px-8">
+              <Button size="lg" variant="outline" className="px-8 text-white border-white hover:bg-white hover:text-blue-600">
                 Take Free Assessment
               </Button>
             </Link>
