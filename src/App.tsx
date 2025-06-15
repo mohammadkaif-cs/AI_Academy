@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import * as session from "@/utils/session";
 import { useEffect } from "react";
 import Chatbot from "./pages/Chatbot";
+import Profile from "./pages/Profile"; // ADD THIS
 
 // Now BrowserRouter is wrapped in AuthProvider
 
@@ -127,6 +128,11 @@ const App = () => {
                 <Route path="/chatbot" element={
                   <ProtectedRoute>
                     <Chatbot />
+                  </ProtectedRoute>
+                } />
+                <Route path="/profile" element={
+                  <ProtectedRoute>
+                    <Profile />
                   </ProtectedRoute>
                 } />
                 <Route path="*" element={<NotFound />} />
