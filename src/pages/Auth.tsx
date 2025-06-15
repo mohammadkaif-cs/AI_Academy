@@ -49,6 +49,7 @@ const Auth = () => {
         navigate('/courses');
       }
     } catch (error: any) {
+      console.error('Auth error:', error);
       let errorMessage = "An error occurred. Please try again.";
       
       if (error.code === 'auth/user-not-found') {
@@ -73,9 +74,17 @@ const Auth = () => {
   };
 
   const handleGoogleSignIn = async () => {
+    console.log('Google Sign-In button clicked');
     setLoading(true);
+    
     try {
+      console.log('Attempting Google Sign-In...');
+      console.log('Auth object:', auth);
+      console.log('Google Provider:', googleProvider);
+      
       const result = await signInWithPopup(auth, googleProvider);
+      console.log('Google Sign-In successful:', result);
+      
       const userEmail = result.user.email || 'there';
       
       toast({
@@ -84,6 +93,10 @@ const Auth = () => {
       });
       navigate('/courses');
     } catch (error: any) {
+      console.error('Google Sign-In error:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+      
       let errorMessage = "Google Sign-In failed. Please try again.";
       
       if (error.code === 'auth/popup-blocked') {

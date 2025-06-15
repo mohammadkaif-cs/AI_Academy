@@ -9,11 +9,17 @@ const firebaseConfig = {
   appId: "1:625122635029:web:a83fb72533ab4190158d1c"
 };
 
+console.log('Initializing Firebase with config:', firebaseConfig);
+
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+console.log('Firebase Auth initialized:', auth);
 
 // Configure Google provider for popup
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
+
+console.log('Google Provider configured:', googleProvider);
