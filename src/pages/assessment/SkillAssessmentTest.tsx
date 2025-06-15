@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -249,15 +248,15 @@ const SkillAssessmentTest: React.FC = () => {
             <h3 className="font-bold text-2xl text-center">Your Result: <span className="text-blue-700">{percent}%</span></h3>
             <div className="text-lg text-center font-semibold mb-2">{message}</div>
             <div className="mb-3">
-              <div className="font-semibold mb-2">Strengths & Weaknesses by Topic:</div>
+              <div className="font-semibold mb-2 text-black">Strengths & Weaknesses by Topic:</div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {Object.entries(resultsByTopic).map(([topic, val]) => (
                   <div
                     key={topic}
-                    className="flex justify-between items-center bg-gray-50 px-3 py-2 rounded"
+                    className="flex justify-between items-center bg-gray-50 px-3 py-2 rounded text-black"
                   >
-                    <span>{topic}</span>
-                    <span>
+                    <span className="text-black">{topic}</span>
+                    <span className="text-black">
                       {val.correct}/{val.total} (
                       {val.total > 0
                         ? Math.round((val.correct / val.total) * 100)
