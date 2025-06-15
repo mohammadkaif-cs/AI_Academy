@@ -43,10 +43,13 @@ export function AppSidebar() {
   const isActive = (to: string) => currentPath === to;
 
   return (
-    <Sidebar className={cn(
-      "sidebar-glow border-r border-[hsl(var(--sidebar-border))] bg-[hsl(var(--sidebar-background))] transition-all duration-300",
-      state === "collapsed" ? "w-16" : "w-64"
-    )} collapsible>
+    <Sidebar
+      className={cn(
+        "sidebar-glow border-r border-[hsl(var(--sidebar-border))] bg-[hsl(var(--sidebar-background))] transition-all duration-300",
+        state === "collapsed" ? "w-16" : "w-64"
+      )}
+      collapsible="icon" // FIXED: pass the correct string value, not boolean
+    >
       <div className="flex items-center justify-between px-4 h-16 border-b border-[hsl(var(--sidebar-border))]">
         <span className={cn(
           "font-black text-xl tracking-tight bg-gradient-to-r from-[#4f8bff] via-[#46c7ff] to-[#00ffd7] bg-clip-text text-transparent select-none transition",
@@ -110,3 +113,4 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
