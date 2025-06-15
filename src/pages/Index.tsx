@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -11,6 +10,16 @@ import { ArrowRight, BookOpen, Users, Award, Brain, Target, TrendingUp, User } f
 const Index = () => {
   const { user } = useAuth();
 
+  // Extract first name from email (part before @)
+  const getFirstName = (email: string) => {
+    const emailPrefix = email.split('@')[0];
+    // Remove dots and capitalize first letter
+    const firstName = emailPrefix.replace(/\./g, '').toLowerCase();
+    return firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  };
+
+  const firstName = user?.displayName || getFirstName(user?.email || '');
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -20,32 +29,25 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-              Master AI with
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Expert Guidance</span>
+              Welcome {firstName}!
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block mt-2">
+                Master AI with Expert Guidance
+              </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-8">
-              Transform your career with comprehensive AI education. From complete beginner to advanced practitioner, 
-              we'll guide you through every step of your artificial intelligence journey.
+              Transform your career with comprehensive AI education. Continue your artificial intelligence journey 
+              with our expert-guided learning platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              {user ? (
-                <Link to="/dashboard">
-                  <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8">
-                    <User className="w-5 h-5 mr-2" />
-                    Go to Dashboard
-                  </Button>
-                </Link>
-              ) : (
-                <Link to="/auth">
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8">
-                    Get Started - Sign Up
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </Link>
-              )}
+              <Link to="/dashboard">
+                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8">
+                  <User className="w-5 h-5 mr-2" />
+                  Go to Dashboard
+                </Button>
+              </Link>
               <Link to="/assessment">
                 <Button size="lg" variant="outline" className="px-8">
-                  Take Free AI Assessment
+                  Take AI Assessment
                 </Button>
               </Link>
               <Link to="/courses">
@@ -205,27 +207,19 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to Start Your AI Journey?</h2>
+          <h2 className="text-4xl font-bold mb-4">Continue Your AI Journey!</h2>
           <p className="text-xl opacity-90 mb-8">
-            Join thousands of professionals who have transformed their careers with our AI education platform.
+            You're logged in and ready to transform your career with our AI education platform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {user ? (
-              <Link to="/dashboard">
-                <Button size="lg" variant="secondary" className="px-8">
-                  Continue Learning
-                </Button>
-              </Link>
-            ) : (
-              <Link to="/auth">
-                <Button size="lg" variant="secondary" className="px-8">
-                  Sign Up Now
-                </Button>
-              </Link>
-            )}
+            <Link to="/dashboard">
+              <Button size="lg" variant="secondary" className="px-8">
+                Continue Learning
+              </Button>
+            </Link>
             <Link to="/assessment">
               <Button size="lg" variant="outline" className="px-8 text-white border-white hover:bg-white hover:text-blue-600">
-                Take Free Assessment
+                Take Assessment
               </Button>
             </Link>
             <Link to="/courses">

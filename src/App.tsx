@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import BeginnerTrack from "./pages/courses/BeginnerTrack";
@@ -31,21 +32,77 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/courses/beginner" element={<BeginnerTrack />} />
-            <Route path="/courses/intermediate" element={<IntermediateTrack />} />
-            <Route path="/courses/advanced" element={<AdvancedTrack />} />
-            <Route path="/courses/generative-ai" element={<GenerativeAI />} />
-            <Route path="/courses/nlp" element={<NLP />} />
-            <Route path="/courses/computer-vision" element={<ComputerVision />} />
-            <Route path="/assessment" element={<Assessment />} />
-            <Route path="/readiness-test" element={<ReadinessTest />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/about" element={
+              <ProtectedRoute>
+                <About />
+              </ProtectedRoute>
+            } />
+            <Route path="/courses" element={
+              <ProtectedRoute>
+                <Courses />
+              </ProtectedRoute>
+            } />
+            <Route path="/courses/beginner" element={
+              <ProtectedRoute>
+                <BeginnerTrack />
+              </ProtectedRoute>
+            } />
+            <Route path="/courses/intermediate" element={
+              <ProtectedRoute>
+                <IntermediateTrack />
+              </ProtectedRoute>
+            } />
+            <Route path="/courses/advanced" element={
+              <ProtectedRoute>
+                <AdvancedTrack />
+              </ProtectedRoute>
+            } />
+            <Route path="/courses/generative-ai" element={
+              <ProtectedRoute>
+                <GenerativeAI />
+              </ProtectedRoute>
+            } />
+            <Route path="/courses/nlp" element={
+              <ProtectedRoute>
+                <NLP />
+              </ProtectedRoute>
+            } />
+            <Route path="/courses/computer-vision" element={
+              <ProtectedRoute>
+                <ComputerVision />
+              </ProtectedRoute>
+            } />
+            <Route path="/assessment" element={
+              <ProtectedRoute>
+                <Assessment />
+              </ProtectedRoute>
+            } />
+            <Route path="/readiness-test" element={
+              <ProtectedRoute>
+                <ReadinessTest />
+              </ProtectedRoute>
+            } />
+            <Route path="/contact" element={
+              <ProtectedRoute>
+                <Contact />
+              </ProtectedRoute>
+            } />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="*" element={
+              <ProtectedRoute>
+                <NotFound />
+              </ProtectedRoute>
+            } />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

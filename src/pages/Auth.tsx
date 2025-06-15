@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -27,7 +26,7 @@ const Auth = () => {
 
   // Redirect if already logged in
   if (user) {
-    return <Navigate to="/courses" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   const onSubmit = async (data: FormData) => {
@@ -39,14 +38,14 @@ const Auth = () => {
           title: "Success!",
           description: `Welcome back, ${data.email}!`,
         });
-        navigate('/courses');
+        navigate('/dashboard');
       } else {
         await createUserWithEmailAndPassword(auth, data.email, data.password);
         toast({
           title: "Account Created!",
           description: `Welcome to AI Academy by AK, ${data.email}!`,
         });
-        navigate('/courses');
+        navigate('/dashboard');
       }
     } catch (error: any) {
       console.error('Auth error:', error);
@@ -91,7 +90,7 @@ const Auth = () => {
         title: "Success!",
         description: `Welcome back, ${userEmail}!`,
       });
-      navigate('/courses');
+      navigate('/dashboard');
     } catch (error: any) {
       console.error('Google Sign-In error:', error);
       console.error('Error code:', error.code);
@@ -122,12 +121,9 @@ const Auth = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link
-            to="/"
-            className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-          >
+          <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             AI Academy by AK
-          </Link>
+          </div>
           <p className="text-gray-600 mt-2">Master AI with Expert Guidance</p>
         </div>
 
