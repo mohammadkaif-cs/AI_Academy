@@ -1,9 +1,10 @@
 
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Award, TrendingUp, Zap, Send, Bot } from 'lucide-react';
+import { BookOpen, Award, TrendingUp, Zap, Send, Bot, Star } from 'lucide-react'; // Added Star
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RTooltip } from 'recharts';
 import { useAuth } from '@/contexts/AuthContext';
+import React, { useEffect, useState } from 'react'; // Added useState/useEffect
 
 const statsData = [
   { name: 'Courses', value: 3 },
@@ -25,9 +26,16 @@ const aiTools = [
 
 export default function Dashboard() {
   const { user } = useAuth();
-  // Avatar circle with first letter, like hidevs
+  // Avatar logic
   const firstName = user?.displayName?.split(" ")[0]
     || user?.email?.split("@")[0]?.replace(/\./g, '').toUpperCase();
+
+  // BEST SCORE STATE (NEW)
+  const [bestAssessmentScore, setBestAssessmentScore] = useState<number>(0);
+  useEffect(() => {
+    const val = Number(localStorage.getItem("ai_skill_best_score") || "0");
+    setBestAssessmentScore(val);
+  }, []);
 
   return (
     <DashboardLayout>
@@ -51,7 +59,7 @@ export default function Dashboard() {
           </div>
         </div>
         {/* Stats row */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           {/* Card 1 */}
           <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
             <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
@@ -97,6 +105,20 @@ export default function Dashboard() {
                   </ResponsiveContainer>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+          {/* Best Score Card (NEW, 4th card) */}
+          <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
+            <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
+              <CardTitle className="text-base font-semibold text-yellow-300 tracking-wide">Best Assessment Score</CardTitle>
+              <Star className="h-7 w-7 text-yellow-200 drop-shadow-glow" />
+            </CardHeader>
+            <CardContent className="px-6 pb-6 pt-1">
+              <div className="text-[2rem] sm:text-[2.4rem] font-black text-white drop-shadow-sm">{bestAssessmentScore}%</div>
+              <div className="text-xs text-yellow-100 mt-1 font-semibold">
+                Your highest AI Skill Readiness Test result
+              </div>
+              <a href="/assessment/skill-test" className="block text-xs text-yellow-300 underline underline-offset-4 mt-2 hover:text-yellow-200 transition">Take Assessment</a>
             </CardContent>
           </Card>
         </div>

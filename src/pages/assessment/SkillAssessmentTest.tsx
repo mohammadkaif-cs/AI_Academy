@@ -233,6 +233,16 @@ const SkillAssessmentTest: React.FC = () => {
   // Progress bar percentage
   const progress = ((current + 1) / NUM_QUESTIONS) * 100;
 
+  // Save the best score to localStorage if it's higher than before
+  useEffect(() => {
+    if (showResult) {
+      const previousBest = Number(localStorage.getItem("ai_skill_best_score") || "0");
+      if (percent > previousBest) {
+        localStorage.setItem("ai_skill_best_score", String(percent));
+      }
+    }
+  }, [showResult, percent]);
+
   return (
     <div className="bg-background min-h-screen flex flex-col items-center px-2 py-8">
       <Card className="w-full max-w-xl mx-auto">
