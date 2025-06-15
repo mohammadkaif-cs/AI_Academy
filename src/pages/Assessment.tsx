@@ -103,8 +103,8 @@ const Assessment = () => {
                   <span>Instant results</span>
                 </div>
               </div>
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8">
-                Start Assessment
+              <Button size="lg" className="bg-white text-black px-8 hover:bg-white hover:text-black">
+                Start Free Assessment
               </Button>
             </div>
           </div>
