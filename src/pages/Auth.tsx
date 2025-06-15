@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -109,25 +108,25 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex">
       {/* Left Side - Hero Section */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
         {/* Background Effects */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-blue-600/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-600/20 via-gray-800/10 to-transparent"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
         
         {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-xl"></div>
-        <div className="absolute bottom-32 right-20 w-48 h-48 bg-blue-500/20 rounded-full blur-xl"></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gray-500/20 rounded-full blur-xl"></div>
+        <div className="absolute bottom-32 right-20 w-48 h-48 bg-gray-400/20 rounded-full blur-xl"></div>
         
         {/* Content */}
         <div className="relative z-10 flex flex-col justify-center items-start p-16 text-white">
           {/* Logo */}
           <div className="flex items-center mb-12">
-            <div className="w-14 h-14 bg-gradient-to-br from-purple-400 to-blue-500 rounded-2xl flex items-center justify-center mr-4 shadow-2xl">
+            <div className="w-14 h-14 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl flex items-center justify-center mr-4 shadow-2xl">
               <Brain className="h-8 w-8 text-white" />
             </div>
-            <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <div className="text-3xl font-bold bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
               AI Academy
             </div>
           </div>
@@ -137,26 +136,26 @@ const Auth = () => {
             <h1 className="text-5xl font-bold mb-6 leading-tight">
               Master the
               <br />
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">
                 Future of AI
               </span>
             </h1>
-            <p className="text-xl text-slate-300 mb-12 leading-relaxed">
+            <p className="text-xl text-gray-300 mb-12 leading-relaxed">
               Join thousands of learners mastering artificial intelligence with hands-on courses designed by industry experts.
             </p>
             
             {/* Features */}
             <div className="space-y-6">
-              <div className="flex items-center text-slate-300">
-                <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full mr-4"></div>
+              <div className="flex items-center text-gray-300">
+                <div className="w-3 h-3 bg-gradient-to-r from-gray-400 to-white rounded-full mr-4"></div>
                 <span className="text-lg">Expert-designed curriculum</span>
               </div>
-              <div className="flex items-center text-slate-300">
-                <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full mr-4"></div>
+              <div className="flex items-center text-gray-300">
+                <div className="w-3 h-3 bg-gradient-to-r from-gray-400 to-white rounded-full mr-4"></div>
                 <span className="text-lg">Real-world projects</span>
               </div>
-              <div className="flex items-center text-slate-300">
-                <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full mr-4"></div>
+              <div className="flex items-center text-gray-300">
+                <div className="w-3 h-3 bg-gradient-to-r from-gray-400 to-white rounded-full mr-4"></div>
                 <span className="text-lg">Industry certifications</span>
               </div>
             </div>
@@ -169,7 +168,7 @@ const Auth = () => {
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center justify-center mb-8">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center mr-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl flex items-center justify-center mr-3">
               <Brain className="h-7 w-7 text-white" />
             </div>
             <div className="text-2xl font-bold text-white">AI Academy</div>
@@ -179,7 +178,7 @@ const Auth = () => {
           <div className="flex justify-between items-center mb-8">
             <Link 
               to="/" 
-              className="inline-flex items-center text-slate-400 hover:text-white transition-colors text-sm"
+              className="inline-flex items-center text-gray-400 hover:text-white transition-colors text-sm"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to website
@@ -191,14 +190,14 @@ const Auth = () => {
             <h2 className="text-3xl font-bold text-white mb-2">
               {isLogin ? 'Welcome back' : 'Create account'}
             </h2>
-            <p className="text-slate-400">
+            <p className="text-gray-400">
               {isLogin ? (
                 <>
                   Don&apos;t have an account?{' '}
                   <button
                     type="button"
                     onClick={() => setIsLogin(!isLogin)}
-                    className="text-purple-400 hover:text-purple-300 font-medium"
+                    className="text-gray-300 hover:text-white font-medium"
                   >
                     Sign up
                   </button>
@@ -209,7 +208,7 @@ const Auth = () => {
                   <button
                     type="button"
                     onClick={() => setIsLogin(!isLogin)}
-                    className="text-purple-400 hover:text-purple-300 font-medium"
+                    className="text-gray-300 hover:text-white font-medium"
                   >
                     Log in
                   </button>
@@ -222,14 +221,14 @@ const Auth = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Email Field */}
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-300 text-sm font-medium">
+              <Label htmlFor="email" className="text-gray-300 text-sm font-medium">
                 Email address
               </Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="Enter your email"
-                className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus:border-purple-500 focus:ring-purple-500/20 h-12 backdrop-blur-sm"
+                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-gray-500 focus:ring-gray-500/20 h-12 backdrop-blur-sm"
                 {...register('email', { 
                   required: 'Email is required',
                   pattern: {
@@ -245,7 +244,7 @@ const Auth = () => {
 
             {/* Password Field */}
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-300 text-sm font-medium">
+              <Label htmlFor="password" className="text-gray-300 text-sm font-medium">
                 Password
               </Label>
               <div className="relative">
@@ -253,7 +252,7 @@ const Auth = () => {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
-                  className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus:border-purple-500 focus:ring-purple-500/20 h-12 pr-12 backdrop-blur-sm"
+                  className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-gray-500 focus:ring-gray-500/20 h-12 pr-12 backdrop-blur-sm"
                   {...register('password', { 
                     required: 'Password is required',
                     minLength: {
@@ -265,7 +264,7 @@ const Auth = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -278,7 +277,7 @@ const Auth = () => {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium rounded-lg transition-all duration-200 shadow-xl"
+              className="w-full h-12 bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white font-medium rounded-lg transition-all duration-200 shadow-xl"
               disabled={loading}
             >
               {loading ? (
@@ -294,10 +293,10 @@ const Auth = () => {
             {/* Divider */}
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-slate-700" />
+                <span className="w-full border-t border-gray-700" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 px-4 text-slate-400">Or continue with</span>
+                <span className="bg-gradient-to-br from-black via-gray-900 to-black px-4 text-gray-400">Or continue with</span>
               </div>
             </div>
 
@@ -305,7 +304,7 @@ const Auth = () => {
             <Button
               type="button"
               variant="outline"
-              className="w-full h-12 bg-slate-800/50 border-slate-700 text-white hover:bg-slate-700/50 hover:border-slate-600 backdrop-blur-sm"
+              className="w-full h-12 bg-gray-800/50 border-gray-700 text-white hover:bg-gray-700/50 hover:border-gray-600 backdrop-blur-sm"
               onClick={handleGoogleSignIn}
               disabled={loading}
             >
