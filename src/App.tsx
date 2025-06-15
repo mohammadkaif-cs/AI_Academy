@@ -13,7 +13,7 @@ import IntermediateTrack from "./pages/courses/IntermediateTrack";
 import AdvancedTrack from "./pages/courses/AdvancedTrack";
 import GenerativeAI from "./pages/courses/GenerativeAI";
 import NLP from "./pages/courses/NLP";
-import ComputerVision from "./pages/ComputerVision";
+import ComputerVision from "./pages/courses/ComputerVision"; // updated import path
 import About from "./pages/About";
 import Assessment from "./pages/Assessment";
 import ReadinessTest from "./pages/ReadinessTest";
