@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -9,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Mail, Lock, Chrome } from 'lucide-react';
+import { Mail, Lock, Chrome, Brain, Sparkles, Loader2 } from 'lucide-react';
 
 interface FormData {
   email: string;
@@ -35,15 +36,15 @@ const Auth = () => {
       if (isLogin) {
         await signInWithEmailAndPassword(auth, data.email, data.password);
         toast({
-          title: "Success!",
-          description: `Welcome back, ${data.email}!`,
+          title: "Welcome back!",
+          description: "Successfully signed in to AI Academy",
         });
         navigate('/dashboard');
       } else {
         await createUserWithEmailAndPassword(auth, data.email, data.password);
         toast({
           title: "Account Created!",
-          description: `Welcome to AI Academy by AK, ${data.email}!`,
+          description: "Welcome to AI Academy by AK!",
         });
         navigate('/dashboard');
       }
@@ -73,28 +74,19 @@ const Auth = () => {
   };
 
   const handleGoogleSignIn = async () => {
-    console.log('Google Sign-In button clicked');
     setLoading(true);
     
     try {
-      console.log('Attempting Google Sign-In...');
-      console.log('Auth object:', auth);
-      console.log('Google Provider:', googleProvider);
-      
       const result = await signInWithPopup(auth, googleProvider);
-      console.log('Google Sign-In successful:', result);
-      
       const userEmail = result.user.email || 'there';
       
       toast({
-        title: "Success!",
-        description: `Welcome back, ${userEmail}!`,
+        title: "Welcome!",
+        description: `Successfully signed in with Google`,
       });
       navigate('/dashboard');
     } catch (error: any) {
       console.error('Google Sign-In error:', error);
-      console.error('Error code:', error.code);
-      console.error('Error message:', error.message);
       
       let errorMessage = "Google Sign-In failed. Please try again.";
       
@@ -118,117 +110,195 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            AI Academy by AK
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 flex">
+      {/* Left Side - Illustration/Content for larger screens */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 items-center justify-center p-12 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative z-10 text-center text-white">
+          <div className="flex items-center justify-center mb-8">
+            <Brain className="h-20 w-20 text-white/90 mr-4" />
+            <Sparkles className="h-12 w-12 text-yellow-300 animate-pulse" />
           </div>
-          <p className="text-gray-600 mt-2">Master AI with Expert Guidance</p>
+          <h1 className="text-5xl font-bold mb-6 leading-tight">
+            AI Academy
+            <span className="block text-3xl font-normal text-blue-100 mt-2">by AK</span>
+          </h1>
+          <p className="text-xl text-blue-100 mb-8 max-w-md">
+            Master the future of technology with expert-guided AI courses and hands-on projects
+          </p>
+          <div className="grid grid-cols-2 gap-4 text-sm text-blue-100">
+            <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+              <div className="font-semibold mb-1">500+ Students</div>
+              <div className="text-xs">Learning AI</div>
+            </div>
+            <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
+              <div className="font-semibold mb-1">Expert Guidance</div>
+              <div className="text-xs">Real Projects</div>
+            </div>
+          </div>
         </div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-20 left-20 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-300/10 rounded-full blur-2xl"></div>
+      </div>
 
-        <Card className="shadow-xl">
-          <CardHeader>
-            <CardTitle className="text-2xl text-center">
-              {isLogin ? 'Welcome Back' : 'Create Account'}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    className="pl-10"
-                    {...register('email', { 
-                      required: 'Email is required',
-                      pattern: {
-                        value: /^\S+@\S+$/i,
-                        message: 'Invalid email address'
-                      }
-                    })}
-                  />
-                </div>
-                {errors.email && (
-                  <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
-                )}
-              </div>
+      {/* Right Side - Auth Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          {/* Mobile Header */}
+          <div className="lg:hidden text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <Brain className="h-12 w-12 text-blue-600 mr-2" />
+              <Sparkles className="h-8 w-8 text-purple-500" />
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              AI Academy by AK
+            </h1>
+            <p className="text-gray-600 mt-2">Login to access premium AI content</p>
+          </div>
 
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    className="pl-10"
-                    {...register('password', { 
-                      required: 'Password is required',
-                      minLength: {
-                        value: 6,
-                        message: 'Password must be at least 6 characters'
-                      }
-                    })}
-                  />
+          {/* Desktop Header */}
+          <div className="hidden lg:block text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Welcome to AI Academy
+            </h2>
+            <p className="text-gray-600">Login to access premium AI content</p>
+          </div>
+
+          <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
+            <CardHeader className="space-y-1 pb-6">
+              <CardTitle className="text-2xl text-center font-semibold text-gray-800">
+                {isLogin ? 'Sign In' : 'Create Account'}
+              </CardTitle>
+              <p className="text-center text-gray-600 text-sm">
+                {isLogin 
+                  ? 'Welcome back! Please sign in to continue' 
+                  : 'Join thousands of AI enthusiasts today'
+                }
+              </p>
+            </CardHeader>
+            
+            <CardContent className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                    Email Address
+                  </Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      className="pl-11 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+                      {...register('email', { 
+                        required: 'Email is required',
+                        pattern: {
+                          value: /^\S+@\S+$/i,
+                          message: 'Invalid email address'
+                        }
+                      })}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
+                  )}
                 </div>
-                {errors.password && (
-                  <p className="text-sm text-red-600 mt-1">{errors.password.message}</p>
-                )}
+
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                    Password
+                  </Label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Enter your password"
+                      className="pl-11 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500 rounded-lg"
+                      {...register('password', { 
+                        required: 'Password is required',
+                        minLength: {
+                          value: 6,
+                          message: 'Password must be at least 6 characters'
+                        }
+                      })}
+                    />
+                  </div>
+                  {errors.password && (
+                    <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
+                  )}
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-200 transform hover:scale-[1.02]"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {isLogin ? 'Signing In...' : 'Creating Account...'}
+                    </>
+                  ) : (
+                    isLogin ? 'Sign In' : 'Create Account'
+                  )}
+                </Button>
+              </form>
+
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-gray-200" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-white px-4 text-gray-500 font-medium">Or continue with</span>
+                </div>
               </div>
 
               <Button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                variant="outline"
+                className="w-full h-12 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 transform hover:scale-[1.02] rounded-lg"
+                onClick={handleGoogleSignIn}
                 disabled={loading}
               >
-                {loading ? 'Please wait...' : (isLogin ? 'Sign In' : 'Create Account')}
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Signing in...
+                  </>
+                ) : (
+                  <>
+                    <Chrome className="mr-3 h-5 w-5 text-blue-500" />
+                    Continue with Google
+                  </>
+                )}
               </Button>
-            </form>
 
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
+              <div className="text-center pt-4">
+                <p className="text-sm text-gray-600">
+                  {isLogin ? "Don't have an account?" : "Already have an account?"}
+                  <button
+                    type="button"
+                    onClick={() => setIsLogin(!isLogin)}
+                    className="ml-2 text-blue-600 hover:text-blue-700 font-medium hover:underline transition-colors duration-200"
+                  >
+                    {isLogin ? 'Sign up' : 'Sign in'}
+                  </button>
+                </p>
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-              </div>
-            </div>
 
-            <Button
-              variant="outline"
-              className="w-full"
-              onClick={handleGoogleSignIn}
-              disabled={loading}
-            >
-              <Chrome className="mr-2 h-4 w-4" />
-              {loading ? 'Signing in...' : 'Continue with Google'}
-            </Button>
-
-            <div className="text-center">
-              <p className="text-sm text-gray-600">
-                {isLogin ? "Don't have an account?" : "Already have an account?"}
-                <button
-                  type="button"
-                  onClick={() => setIsLogin(!isLogin)}
-                  className="ml-1 text-blue-600 hover:underline font-medium"
+              <div className="text-center pt-2">
+                <Link 
+                  to="/" 
+                  className="text-sm text-gray-500 hover:text-gray-700 transition-colors duration-200"
                 >
-                  {isLogin ? 'Sign up' : 'Sign in'}
-                </button>
-              </p>
-            </div>
-
-            <div className="text-center">
-              <Link to="/" className="text-sm text-gray-600 hover:text-blue-600">
-                ← Back to Home
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+                  ← Back to Home
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
