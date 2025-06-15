@@ -22,7 +22,7 @@ const Index = () => {
   const firstName = user?.displayName || getFirstName(user?.email || '');
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       
       {/* Hero Section */}
@@ -32,20 +32,20 @@ const Index = () => {
             {user ? (
               <>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">
-                  Welcome back, <span className="text-blue-600">{firstName}!</span>
+                  Welcome back, <span className="text-blue-600 animate-pulse">{firstName}!</span>
                 </h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
                   Continue your AI mastery journey with expert-guided learning.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
                   <Link to="/dashboard">
-                    <Button size="lg" className="px-8 py-3">
+                    <Button size="lg" className="px-8 py-3 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                       <User className="w-5 h-5 mr-2" />
                       Continue Learning
                     </Button>
                   </Link>
                   <Link to="/assessment">
-                    <Button size="lg" variant="outline" className="px-8 py-3">
+                    <Button size="lg" variant="outline" className="px-8 py-3 hover:scale-105 transition-all duration-200 hover:bg-blue-50 hover:border-blue-300">
                       Take Assessment
                     </Button>
                   </Link>
@@ -61,13 +61,13 @@ const Index = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
                   <Link to="/auth">
-                    <Button size="lg" className="px-8 py-3">
+                    <Button size="lg" className="px-8 py-3 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                       Start Learning
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>
                   <Link to="/courses">
-                    <Button size="lg" variant="outline" className="px-8 py-3">
+                    <Button size="lg" variant="outline" className="px-8 py-3 hover:scale-105 transition-all duration-200 hover:bg-blue-50 hover:border-blue-300">
                       <Play className="w-5 h-5 mr-2" />
                       Explore Courses
                     </Button>
@@ -78,19 +78,19 @@ const Index = () => {
             
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <Card className="text-center">
+              <Card className="text-center hover:shadow-lg transition-all duration-300 hover:scale-105 border-0 shadow-md">
                 <CardContent className="pt-6">
                   <div className="text-3xl font-bold text-blue-600 mb-2">10,000+</div>
                   <div className="text-gray-600">Students Trained</div>
                 </CardContent>
               </Card>
-              <Card className="text-center">
+              <Card className="text-center hover:shadow-lg transition-all duration-300 hover:scale-105 border-0 shadow-md">
                 <CardContent className="pt-6">
                   <div className="text-3xl font-bold text-green-600 mb-2">95%</div>
                   <div className="text-gray-600">Completion Rate</div>
                 </CardContent>
               </Card>
-              <Card className="text-center">
+              <Card className="text-center hover:shadow-lg transition-all duration-300 hover:scale-105 border-0 shadow-md">
                 <CardContent className="pt-6">
                   <div className="text-3xl font-bold text-yellow-600 mb-2 flex items-center justify-center">
                     4.8/5 <Star className="w-6 h-6 text-yellow-500 ml-1" />
@@ -116,87 +116,87 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="hover:shadow-lg transition-shadow">
+            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-0 shadow-lg group">
               <CardHeader>
-                <Badge className="bg-green-100 text-green-800 w-fit">Beginner</Badge>
-                <CardTitle className="text-xl">Start Your AI Journey</CardTitle>
+                <Badge className="bg-green-100 text-green-800 w-fit group-hover:bg-green-200 transition-colors duration-200">Beginner</Badge>
+                <CardTitle className="text-xl group-hover:text-green-600 transition-colors duration-200">Start Your AI Journey</CardTitle>
                 <p className="text-gray-600">Perfect for complete beginners with no technical background.</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
                     What is AI?
                   </div>
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
                     Machine Learning basics
                   </div>
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-green-500 mr-3 flex-shrink-0" />
                     Hands-on with Teachable Machine
                   </div>
                 </div>
                 <Link to="/courses/beginner">
-                  <Button className="w-full bg-green-600 hover:bg-green-700">
+                  <Button className="w-full bg-green-600 hover:bg-green-700 hover:scale-105 transition-all duration-200">
                     Start Learning
                   </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow">
+            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-0 shadow-lg group">
               <CardHeader>
-                <Badge className="bg-blue-100 text-blue-800 w-fit">Intermediate</Badge>
-                <CardTitle className="text-xl">Build Practical Skills</CardTitle>
+                <Badge className="bg-blue-100 text-blue-800 w-fit group-hover:bg-blue-200 transition-colors duration-200">Intermediate</Badge>
+                <CardTitle className="text-xl group-hover:text-blue-600 transition-colors duration-200">Build Practical Skills</CardTitle>
                 <p className="text-gray-600">Develop business-ready AI skills and applications.</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     Building ML Models
                   </div>
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     AI in Business
                   </div>
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" />
                     Prompt Engineering
                   </div>
                 </div>
                 <Link to="/courses/intermediate">
-                  <Button className="w-full">
+                  <Button className="w-full hover:scale-105 transition-all duration-200">
                     Advance Skills
                   </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow">
+            <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 border-0 shadow-lg group">
               <CardHeader>
-                <Badge className="bg-purple-100 text-purple-800 w-fit">Advanced</Badge>
-                <CardTitle className="text-xl">Master AI Systems</CardTitle>
+                <Badge className="bg-purple-100 text-purple-800 w-fit group-hover:bg-purple-200 transition-colors duration-200">Advanced</Badge>
+                <CardTitle className="text-xl group-hover:text-purple-600 transition-colors duration-200">Master AI Systems</CardTitle>
                 <p className="text-gray-600">Deep dive into cutting-edge AI technologies.</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     Deep Learning
                   </div>
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     Transformers & LLMs
                   </div>
                   <div className="flex items-center text-gray-700">
-                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3" />
+                    <CheckCircle className="w-4 h-4 text-purple-500 mr-3 flex-shrink-0" />
                     Scalable AI Systems
                   </div>
                 </div>
                 <Link to="/courses/advanced">
-                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700 hover:scale-105 transition-all duration-200">
                     Master AI
                   </Button>
                 </Link>
@@ -206,7 +206,7 @@ const Index = () => {
 
           <div className="text-center mt-12">
             <Link to="/courses">
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="hover:scale-105 transition-all duration-200 hover:bg-blue-50 hover:border-blue-300">
                 View All Courses
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -228,12 +228,12 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center">
+            <Card className="text-center hover:shadow-xl transition-all duration-300 hover:scale-105 border-0 shadow-lg group">
               <CardHeader>
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 group-hover:scale-110 transition-all duration-300">
                   <BookOpen className="w-8 h-8 text-blue-600" />
                 </div>
-                <CardTitle className="text-xl">Hands-On Learning</CardTitle>
+                <CardTitle className="text-xl group-hover:text-blue-600 transition-colors duration-200">Hands-On Learning</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
@@ -242,12 +242,12 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="text-center">
+            <Card className="text-center hover:shadow-xl transition-all duration-300 hover:scale-105 border-0 shadow-lg group">
               <CardHeader>
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 group-hover:scale-110 transition-all duration-300">
                   <Users className="w-8 h-8 text-green-600" />
                 </div>
-                <CardTitle className="text-xl">Expert Guidance</CardTitle>
+                <CardTitle className="text-xl group-hover:text-green-600 transition-colors duration-200">Expert Guidance</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
@@ -256,12 +256,12 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="text-center">
+            <Card className="text-center hover:shadow-xl transition-all duration-300 hover:scale-105 border-0 shadow-lg group">
               <CardHeader>
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 group-hover:scale-110 transition-all duration-300">
                   <Award className="w-8 h-8 text-purple-600" />
                 </div>
-                <CardTitle className="text-xl">Industry Recognition</CardTitle>
+                <CardTitle className="text-xl group-hover:text-purple-600 transition-colors duration-200">Industry Recognition</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
@@ -284,12 +284,12 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/dashboard">
-                  <Button size="lg" variant="secondary" className="px-8 py-3">
+                  <Button size="lg" variant="secondary" className="px-8 py-3 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                     Continue Learning
                   </Button>
                 </Link>
                 <Link to="/assessment">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 hover:scale-105 transition-all duration-200">
                     Take Assessment
                   </Button>
                 </Link>
@@ -303,12 +303,12 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/auth">
-                  <Button size="lg" variant="secondary" className="px-8 py-3">
+                  <Button size="lg" variant="secondary" className="px-8 py-3 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                     Get Started Free
                   </Button>
                 </Link>
                 <Link to="/courses">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 hover:scale-105 transition-all duration-200">
                     Explore Courses
                   </Button>
                 </Link>

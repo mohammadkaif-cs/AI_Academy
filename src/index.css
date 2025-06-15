@@ -95,4 +95,79 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Fix potential layout shifts */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure buttons are consistently styled */
+  button {
+    cursor: pointer;
+  }
+
+  /* Remove default focus styles and add custom ones */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Custom hover animations */
+  .hover-lift {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-xl;
+  }
+
+  /* Ensure mobile menu doesn't cause horizontal scroll */
+  .mobile-menu {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar for better UX */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer utilities {
+  /* Text balance for better typography */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Fix for Safari button styles */
+  .button-reset {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 }
