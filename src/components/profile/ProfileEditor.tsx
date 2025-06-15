@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { Paperclip } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 const STATUS_OPTIONS = [
   "Unknown Status",
@@ -18,6 +20,8 @@ export default function ProfileEditor() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [resumeName, setResumeName] = useState<string>("No file chosen");
   const [status, setStatus] = useState(STATUS_OPTIONS[0]);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -32,10 +36,16 @@ export default function ProfileEditor() {
     }
   };
 
-  // dummy submit handler
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Implement save logic or toast
+    toast({
+      title: "Profile updated!",
+      description: "Your profile changes have been saved.",
+      duration: 1800,
+    });
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 900); // brief delay so toast is visible
   };
 
   return (
@@ -185,3 +195,4 @@ export default function ProfileEditor() {
     </div>
   );
 }
+
