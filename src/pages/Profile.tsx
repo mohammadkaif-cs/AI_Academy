@@ -1,176 +1,155 @@
+
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { Card, CardHeader, CardContent, CardTitle, CardDescription } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useAuth } from "@/contexts/AuthContext";
-import { useToast } from "@/components/ui/use-toast";
-import { useNavigate } from "react-router-dom";
-import ProfileHeader from "@/components/profile/ProfileHeader";
-import ProfileStats from "@/components/profile/ProfileStats";
-import ProfileTabs from "@/components/profile/ProfileTabs";
-import ProfileProjects from "@/components/profile/ProfileProjects";
-import ProfileAchievements from "@/components/profile/ProfileAchievements";
-import ProfileEditor from "@/components/profile/ProfileEditor";
+import { Button } from "@/components/ui/button";
+import { User } from "lucide-react";
 import ProfileBackToDashboardButton from "@/components/profile/ProfileBackToDashboardButton";
+import { useNavigate } from "react-router-dom";
+
+const LOCAL_PROFILE_KEY = "user_profile_data";
 
 interface ProfileData {
   fullName: string;
   bio: string;
   photoUrl: string;
+  role?: string;
+  username?: string;
+  email?: string;
+  linkedin?: string;
+  github?: string;
+  status?: string;
+  resumeName?: string;
 }
-
-const LOCAL_PROFILE_KEY = "user_profile_data";
 
 export default function ProfilePage() {
   const { user } = useAuth();
-  const { toast } = useToast();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<ProfileData>({
     fullName: "",
     bio: "",
     photoUrl: "",
+    role: "",
+    username: "",
+    email: "",
+    linkedin: "",
+    github: "",
+    status: "",
+    resumeName: "",
   });
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
-  const [tab, setTab] = useState("overview");
-
-  // Example/mock data for stats, projects, achievements
-  const stats = {
-    followers: 256,
-    following: 187,
-    projects: 6,
-    achievements: 4
-  };
-
-  const projects = [
-    {
-      id: "1",
-      title: "Portfolio Website",
-      thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80",
-      tags: ["React", "Design", "Personal"]
-    },
-    {
-      id: "2",
-      title: "AI Chatbot",
-      thumbnail: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=400&q=80",
-      tags: ["AI", "NLP"]
-    },
-    {
-      id: "3",
-      title: "Open Source UI Kit",
-      thumbnail: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=400&q=80",
-      tags: ["React", "opensource"]
-    }
-  ];
-
-  const achievements = [
-    { id: "1", title: "Top 10 Global Hackathon", badge: "award", highlight: true },
-    { id: "2", title: "AI Specialist", badge: "star" },
-    { id: "3", title: "1000+ Downloads", badge: "award" },
-    { id: "4", title: "Open Source Contributor", badge: "award" }
-  ];
 
   // Load from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(LOCAL_PROFILE_KEY);
     if (saved) {
       setProfile(JSON.parse(saved));
-      setPhotoPreview(JSON.parse(saved).photoUrl || null);
     } else if (user) {
       setProfile(prev => ({
         ...prev,
         fullName: user.displayName || "",
         photoUrl: user.photoURL || "",
+        email: user.email || "",
       }));
-      setPhotoPreview(user.photoURL || null);
     }
   }, [user]);
 
-  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value } = e.target;
-    setProfile(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  }
-
-  // Handle photo upload and preview
-  async function handlePhotoChange(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      const url = ev.target?.result as string;
-      setPhotoPreview(url);
-      setProfile(prev => ({ ...prev, photoUrl: url }));
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function handleSaveProfile(e: React.FormEvent) {
-    e.preventDefault();
-    setSaving(true);
-    setTimeout(() => {
-      localStorage.setItem(LOCAL_PROFILE_KEY, JSON.stringify(profile));
-      setSaving(false);
-      toast({
-        title: "Profile saved!",
-        description: "Your profile changes have been saved.",
-        duration: 2000,
-      });
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 1000); // Wait for toast, then redirect
-    }, 500);
-  }
+  const {
+    fullName,
+    bio,
+    photoUrl,
+    role,
+    username,
+    email,
+    linkedin,
+    github,
+    status,
+    resumeName,
+  } = profile;
 
   return (
-    <div className="max-w-4xl mx-auto w-full py-8 px-3 sm:px-6">
-      {/* Back to Dashboard */}
+    <div className="max-w-lg mx-auto w-full py-10 px-3 sm:px-6">
       <ProfileBackToDashboardButton />
-      {/* Profile Header */}
-      <ProfileHeader
-        fullName={profile.fullName || user?.displayName || "Your Name"}
-        bio={profile.bio}
-        role="AI Developer"
-        photoUrl={photoPreview || user?.photoURL}
-        onEdit={() => setTab("settings")}
-      />
-      {/* Stats */}
-      <ProfileStats {...stats} />
-
-      <ProfileTabs tab={tab} onTabChange={setTab}>
-        <div>
-          {/* Tab Contents */}
-          {tab === "overview" && (
-            <div className="mt-6 grid md:grid-cols-3 gap-8">
-              <div className="md:col-span-2">
-                <div className="mb-4 font-semibold text-lg">Projects</div>
-                <ProfileProjects projects={projects} />
-              </div>
-              <div>
-                <div className="mb-4 font-semibold text-lg">Achievements</div>
-                <ProfileAchievements achievements={achievements} />
-              </div>
+      <div
+        className="
+          bg-white/10 backdrop-blur-lg border border-white/20
+          rounded-2xl shadow-xl glassmorphism-profile-card
+          px-9 py-10 flex flex-col items-center gap-7
+        "
+        style={{
+          boxShadow: "0 8px 32px 0 hsl(var(--glow)/0.12), 0 0 1.5px 0 hsl(var(--glow)/0.30)"
+        }}
+      >
+        <Avatar className="h-24 w-24 shadow-lg ring-2 ring-white/40">
+          {photoUrl ? (
+            <AvatarImage src={photoUrl} alt="Profile Photo" />
+          ) : (
+            <AvatarFallback>
+              <User className="w-10 h-10 text-muted-foreground" />
+            </AvatarFallback>
+          )}
+        </Avatar>
+        <div className="w-full text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold">{fullName || "Your Name"}</h2>
+          {role && <div className="mt-2 text-primary font-medium">{role}</div>}
+          {status && <div className="mt-1 text-sm text-muted-foreground">{status}</div>}
+        </div>
+        {bio && (
+          <div className="max-w-prose text-base text-center text-muted-foreground">{bio}</div>
+        )}
+        <div className="flex flex-col gap-2 w-full items-center text-sm mt-2">
+          {email && (
+            <div>
+              <span className="font-medium">Email: </span>
+              <span className="text-muted-foreground">{email}</span>
             </div>
           )}
-          {tab === "projects" && (
-            <ProfileProjects projects={projects} />
+          {username && (
+            <div>
+              <span className="font-medium">Username: </span>
+              <span className="text-muted-foreground">{username}</span>
+            </div>
           )}
-          {tab === "achievements" && (
-            <ProfileAchievements achievements={achievements} />
+          {linkedin && (
+            <div>
+              <span className="font-medium">LinkedIn: </span>
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline"
+              >
+                {linkedin}
+              </a>
+            </div>
           )}
-          {tab === "settings" && (
-            <div className="mt-6">
-              <ProfileEditor />
+          {github && (
+            <div>
+              <span className="font-medium">GitHub: </span>
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline"
+              >
+                {github}
+              </a>
+            </div>
+          )}
+          {resumeName && resumeName !== "No file chosen" && (
+            <div>
+              <span className="font-medium">Resume: </span>
+              <span className="text-muted-foreground">{resumeName}</span>
             </div>
           )}
         </div>
-      </ProfileTabs>
+        <Button
+          variant="outline"
+          className="rounded-full px-7 py-2 font-semibold mt-3 shadow bg-white/15 backdrop-blur text-foreground border border-white/20 hover:bg-white/30 transition-all"
+          onClick={() => navigate("/profile?edit=true")}
+        >
+          Edit Profile
+        </Button>
+      </div>
     </div>
   );
 }
