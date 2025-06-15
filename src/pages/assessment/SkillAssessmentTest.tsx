@@ -100,7 +100,7 @@ const QUESTIONS: Question[] = [
   // ... add up to 50
 ];
 
-const NUM_QUESTIONS = 8; // Set to 8 for demo, should use 50 in production
+const NUM_QUESTIONS = 50; // Changed from 8 to 50 per requirements
 const DURATION_MINUTES = 20;
 
 const SCORE_MESSAGES = [
@@ -127,15 +127,20 @@ const SkillAssessmentTest: React.FC = () => {
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [submitting, setSubmitting] = useState(false);
 
-  // On mount
+  // On mount (or retake), shuffle all questions and pick 50
   useEffect(() => {
     if (!user) {
       toast({ title: "Please log in to take the assessment." });
       navigate("/auth");
       return;
     }
-    setShuffledQuestions(shuffle(QUESTIONS).slice(0, NUM_QUESTIONS));
-  }, [user, navigate]);
+    // If not enough questions, duplicate existing & shuffle till we reach 50
+    let qs: Question[] = [];
+    while (qs.length < NUM_QUESTIONS) {
+      qs = [...qs, ...shuffle(QUESTIONS)];
+    }
+    setShuffledQuestions(shuffle(qs).slice(0, NUM_QUESTIONS));
+  }, [user, navigate, showResult]); // Re-run when retaking
 
   // Timer behavior
   useEffect(() => {
@@ -183,7 +188,12 @@ const SkillAssessmentTest: React.FC = () => {
     setStarted(false);
     setShowResult(false);
     setTimer(DURATION_MINUTES * 60);
-    setShuffledQuestions(shuffle(QUESTIONS).slice(0, NUM_QUESTIONS));
+    // Shuffle and pick fresh random questions for the new test session
+    let qs: Question[] = [];
+    while (qs.length < NUM_QUESTIONS) {
+      qs = [...qs, ...shuffle(QUESTIONS)];
+    }
+    setShuffledQuestions(shuffle(qs).slice(0, NUM_QUESTIONS));
   };
 
   if (!user) {
