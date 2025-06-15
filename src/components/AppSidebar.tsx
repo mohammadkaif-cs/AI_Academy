@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
@@ -26,7 +25,7 @@ import { cn } from "@/lib/utils";
 
 /* Sidebar links with Home and Courses at the top for easy navigation */
 const sidebarLinks = [
-  { title: "Home", to: "/dashboard", icon: HomeIcon },
+  { title: "Home", to: "/", icon: HomeIcon },
   { title: "Courses", to: "/courses", icon: BookIcon },
   { title: "Dashboard", to: "/dashboard", icon: DashboardIcon },
   { title: "Tutorials", to: "/courses/beginner", icon: TutorialsIcon },
@@ -117,4 +116,3 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
-
