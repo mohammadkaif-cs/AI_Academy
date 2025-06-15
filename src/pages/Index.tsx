@@ -311,7 +311,7 @@ const Index = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-black px-8 py-3 hover:scale-105 transition-all duration-200"
+                    className="border-white text-black bg-white hover:bg-white hover:text-black px-8 py-3 hover:scale-105 transition-all duration-200"
                   >
                     Explore Courses
                   </Button>
