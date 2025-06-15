@@ -327,9 +327,18 @@ const Index = () => {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-white text-black bg-white hover:bg-white hover:text-black px-8 py-3 hover:scale-105 transition-all duration-200"
+                    className="border-blue-600 text-blue-600 hover:bg-blue-100 hover:text-blue-700 px-8 py-3 hover:scale-105 transition-all duration-200"
                   >
                     Explore Courses
+                  </Button>
+                </Link>
+                <Link to="/assessment">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-blue-600 text-blue-600 hover:bg-blue-100 hover:text-blue-700 px-8 py-3 hover:scale-105 transition-all duration-200"
+                  >
+                    Take Assessment
                   </Button>
                 </Link>
               </div>
