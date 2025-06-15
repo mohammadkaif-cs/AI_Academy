@@ -138,7 +138,7 @@ export default function ProfilePage() {
         bio={profile.bio}
         role="AI Developer"
         photoUrl={photoPreview || user?.photoURL}
-        onEdit={() => setShowEdit(true)}
+        onEdit={() => setTab("settings")}
       />
       {/* Stats */}
       <ProfileStats {...stats} />
