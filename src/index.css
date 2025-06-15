@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -131,6 +130,11 @@
 
   .hover-glow {
     @apply transition-all duration-300 hover:shadow-xl;
+  }
+
+  /* Glowing "tech" accent for dashboard */
+  .shadow-glow {
+    box-shadow: 0 0 12px 1px rgba(79, 139, 255, 0.4) !important;
   }
 
   /* Ensure mobile menu doesn't cause horizontal scroll */
