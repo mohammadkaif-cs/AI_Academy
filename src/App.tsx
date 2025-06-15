@@ -37,13 +37,9 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/courses" element={<Courses />} />
             
-            {/* Protected routes - require authentication */}
-            <Route path="/courses" element={
-              <ProtectedRoute>
-                <Courses />
-              </ProtectedRoute>
-            } />
+            {/* Protected routes - require authentication for actual course content */}
             <Route path="/courses/beginner" element={
               <ProtectedRoute>
                 <BeginnerTrack />
