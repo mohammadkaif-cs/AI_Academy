@@ -41,6 +41,16 @@ const Dashboard = () => {
     }
   };
 
+  // Extract first name from email (part before @)
+  const getFirstName = (email: string) => {
+    const emailPrefix = email.split('@')[0];
+    // Remove dots and capitalize first letter
+    const firstName = emailPrefix.replace(/\./g, '').toLowerCase();
+    return firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  };
+
+  const firstName = user.displayName || getFirstName(user.email || '');
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -52,7 +62,7 @@ const Dashboard = () => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
               <div>
                 <h1 className="text-3xl font-bold mb-2">
-                  Welcome back, {user.email}!
+                  Welcome back, {firstName}!
                 </h1>
                 <p className="text-blue-100">
                   Continue your AI learning journey with AI Academy by AK
