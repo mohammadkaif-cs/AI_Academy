@@ -1,8 +1,8 @@
-
 import React, { useState } from "react";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Filter } from "lucide-react";
+import ProfileBackToDashboardButton from "@/components/profile/ProfileBackToDashboardButton";
 
 const projects = [
   {
@@ -252,8 +252,11 @@ export default function ProjectsPage() {
 
   return (
     <div className="relative min-h-[100vh] bg-gradient-to-br from-[#1c212a] via-[#181c24] to-[#23293b] pb-14 px-2">
+      <div className="max-w-6xl mx-auto pt-4 pb-0 px-2">
+        <ProfileBackToDashboardButton />
+      </div>
       {/* Sticky header/filter on mobile */}
-      <div className="max-w-6xl mx-auto pt-6 pb-6 px-2 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4 sticky top-0 bg-black/60 backdrop-blur-md z-30 rounded-b-lg">
+      <div className="max-w-6xl mx-auto pt-2 pb-6 px-2 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4 sticky top-0 bg-black/60 backdrop-blur-md z-30 rounded-b-lg">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight text-white drop-shadow mb-1">
             Projects{" "}
