@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +12,6 @@ interface Message {
 }
 
 export const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -105,122 +103,97 @@ export const Chatbot = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      {/* Chat Toggle Button */}
-      {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="w-16 h-16 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all duration-200 animate-pulse"
-        >
-          <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
-        </Button>
-      )}
-
-      {/* Chat Window */}
-      {isOpen && (
-        <Card className="w-96 h-[500px] shadow-2xl border-2 border-blue-100">
-          <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
-            <div className="flex justify-between items-center">
-              <div>
-                <CardTitle className="text-lg">AI Learning Assistant</CardTitle>
-                <div className="flex items-center gap-2 mt-1">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-blue-100">Online</span>
-                </div>
-              </div>
-              <Button
-                onClick={() => setIsOpen(false)}
-                variant="ghost"
-                size="sm"
-                className="text-white hover:bg-blue-700 h-8 w-8 p-0"
-              >
-                ✕
-              </Button>
+    <Card className="w-full max-w-lg h-[500px] mx-auto shadow-2xl border-2 border-blue-100">
+      <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
+        <div className="flex justify-between items-center">
+          <div>
+            <CardTitle className="text-lg">AI Learning Assistant</CardTitle>
+            <div className="flex items-center gap-2 mt-1">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-xs text-blue-100">Online</span>
             </div>
-          </CardHeader>
-          
-          <CardContent className="flex flex-col h-full p-0">
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={cn(
-                    "flex",
-                    message.isUser ? "justify-end" : "justify-start"
-                  )}
-                >
-                  <div
-                    className={cn(
-                      "max-w-[80%] p-3 rounded-lg text-sm leading-relaxed",
-                      message.isUser
-                        ? "bg-blue-600 text-white rounded-br-sm"
-                        : "bg-white text-gray-900 border shadow-sm rounded-bl-sm"
-                    )}
-                  >
-                    {message.text}
-                  </div>
-                </div>
-              ))}
-              
-              {/* Typing Indicator */}
-              {isTyping && (
-                <div className="flex justify-start">
-                  <div className="bg-white border shadow-sm p-3 rounded-lg rounded-bl-sm">
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                    </div>
-                  </div>
-                </div>
+          </div>
+        </div>
+      </CardHeader>
+      
+      <CardContent className="flex flex-col h-full p-0">
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={cn(
+                "flex",
+                message.isUser ? "justify-end" : "justify-start"
               )}
+            >
+              <div
+                className={cn(
+                  "max-w-[80%] p-3 rounded-lg text-sm leading-relaxed",
+                  message.isUser
+                    ? "bg-blue-600 text-white rounded-br-sm"
+                    : "bg-white text-gray-900 border shadow-sm rounded-bl-sm"
+                )}
+              >
+                {message.text}
+              </div>
             </div>
-
-            {/* Quick Actions */}
-            {messages.length === 1 && !isTyping && (
-              <div className="px-4 pb-2 bg-white border-t">
-                <p className="text-xs text-gray-500 mb-2">Quick questions:</p>
-                <div className="flex flex-wrap gap-1">
-                  {quickActions.slice(0, 3).map((action, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleQuickAction(action)}
-                      className="text-xs px-3 py-1 bg-blue-50 hover:bg-blue-100 rounded-full text-blue-700 transition-colors border border-blue-200"
-                    >
-                      {action}
-                    </button>
-                  ))}
+          ))}
+          
+          {/* Typing Indicator */}
+          {isTyping && (
+            <div className="flex justify-start">
+              <div className="bg-white border shadow-sm p-3 rounded-lg rounded-bl-sm">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                 </div>
               </div>
-            )}
-
-            {/* Input */}
-            <div className="p-4 border-t bg-white">
-              <div className="flex gap-2">
-                <Input
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask me anything about AI learning..."
-                  onKeyPress={handleKeyPress}
-                  className="flex-1 border-gray-200 focus:border-blue-500"
-                  disabled={isTyping}
-                />
-                <Button 
-                  onClick={handleSendMessage}
-                  size="sm"
-                  className="bg-blue-600 hover:bg-blue-700 px-4"
-                  disabled={isTyping || !inputValue.trim()}
-                >
-                  {isTyping ? "..." : "Send"}
-                </Button>
-              </div>
             </div>
-          </CardContent>
-        </Card>
-      )}
-    </div>
+          )}
+        </div>
+
+        {/* Quick Actions */}
+        {messages.length === 1 && !isTyping && (
+          <div className="px-4 pb-2 bg-white border-t">
+            <p className="text-xs text-gray-500 mb-2">Quick questions:</p>
+            <div className="flex flex-wrap gap-1">
+              {quickActions.slice(0, 3).map((action, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleQuickAction(action)}
+                  className="text-xs px-3 py-1 bg-blue-50 hover:bg-blue-100 rounded-full text-blue-700 transition-colors border border-blue-200"
+                >
+                  {action}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Input */}
+        <div className="p-4 border-t bg-white">
+          <div className="flex gap-2">
+            <Input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Ask me anything about AI learning..."
+              onKeyPress={handleKeyPress}
+              className="flex-1 border-gray-200 focus:border-blue-500"
+              disabled={isTyping}
+            />
+            <Button 
+              onClick={handleSendMessage}
+              size="sm"
+              className="bg-blue-600 hover:bg-blue-700 px-4"
+              disabled={isTyping || !inputValue.trim()}
+            >
+              {isTyping ? "..." : "Send"}
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
