@@ -4,8 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Brain, Clock, Target, CheckCircle, Users, Award } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Assessment = () => {
+  const navigate = useNavigate();
+
   const assessmentAreas = [
     {
       title: "AI Fundamentals",
@@ -103,7 +106,8 @@ const Assessment = () => {
                   <span>Instant results</span>
                 </div>
               </div>
-              <Button size="lg" className="bg-white text-black px-8 hover:bg-white hover:text-black">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8"
+                onClick={() => navigate("/assessment/skill-test")}>
                 Start Free Assessment
               </Button>
             </div>

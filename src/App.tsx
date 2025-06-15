@@ -24,6 +24,7 @@ import * as session from "@/utils/session";
 import { useEffect } from "react";
 import Chatbot from "./pages/Chatbot";
 import Profile from "./pages/Profile"; // ADD THIS
+import SkillAssessmentTest from "./pages/assessment/SkillAssessmentTest";
 
 // Now BrowserRouter is wrapped in AuthProvider
 
@@ -113,6 +114,11 @@ const App = () => {
                 <Route path="/assessment" element={
                   <ProtectedRoute>
                     <Assessment />
+                  </ProtectedRoute>
+                } />
+                <Route path="/assessment/skill-test" element={
+                  <ProtectedRoute>
+                    <SkillAssessmentTest />
                   </ProtectedRoute>
                 } />
                 <Route path="/readiness-test" element={
