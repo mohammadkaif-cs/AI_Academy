@@ -14,6 +14,7 @@ import ProfileTabs from "@/components/profile/ProfileTabs";
 import ProfileProjects from "@/components/profile/ProfileProjects";
 import ProfileAchievements from "@/components/profile/ProfileAchievements";
 import ProfileEditor from "@/components/profile/ProfileEditor";
+import ProfileBackToDashboardButton from "@/components/profile/ProfileBackToDashboardButton";
 
 interface ProfileData {
   fullName: string;
@@ -129,6 +130,8 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-4xl mx-auto w-full py-8 px-3 sm:px-6">
+      {/* Back to Dashboard */}
+      <ProfileBackToDashboardButton />
       {/* Profile Header */}
       <ProfileHeader
         fullName={profile.fullName || user?.displayName || "Your Name"}
