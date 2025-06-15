@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase';
 import { useAuth } from '@/contexts/AuthContext';
@@ -22,11 +22,12 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
   // Redirect if already logged in
   if (user) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/courses" replace />;
   }
 
   const onSubmit = async (data: FormData) => {
@@ -36,19 +37,35 @@ const Auth = () => {
         await signInWithEmailAndPassword(auth, data.email, data.password);
         toast({
           title: "Success!",
-          description: "Welcome back to AI Academy!",
+          description: `Welcome back, ${data.email}!`,
         });
+        navigate('/courses');
       } else {
         await createUserWithEmailAndPassword(auth, data.email, data.password);
         toast({
           title: "Account Created!",
-          description: "Welcome to AI Academy by AK!",
+          description: `Welcome to AI Academy by AK, ${data.email}!`,
         });
+        navigate('/courses');
       }
     } catch (error: any) {
+      let errorMessage = "An error occurred. Please try again.";
+      
+      if (error.code === 'auth/user-not-found') {
+        errorMessage = "No account found with this email.";
+      } else if (error.code === 'auth/wrong-password') {
+        errorMessage = "Incorrect password.";
+      } else if (error.code === 'auth/email-already-in-use') {
+        errorMessage = "An account already exists with this email.";
+      } else if (error.code === 'auth/weak-password') {
+        errorMessage = "Password should be at least 6 characters.";
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = "Invalid email address.";
+      }
+      
       toast({
         title: "Error",
-        description: error.message,
+        description: errorMessage,
         variant: "destructive",
       });
     }
@@ -58,15 +75,30 @@ const Auth = () => {
   const handleGoogleSignIn = async () => {
     setLoading(true);
     try {
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      const userEmail = result.user.email || 'there';
+      
       toast({
         title: "Success!",
-        description: "Welcome to AI Academy by AK!",
+        description: `Welcome back, ${userEmail}!`,
       });
+      navigate('/courses');
     } catch (error: any) {
+      let errorMessage = "Google Sign-In failed. Please try again.";
+      
+      if (error.code === 'auth/popup-blocked') {
+        errorMessage = "Popup was blocked. Please allow popups and try again.";
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        errorMessage = "Sign-in was cancelled.";
+      } else if (error.code === 'auth/unauthorized-domain') {
+        errorMessage = "This domain is not authorized for Google Sign-In.";
+      } else if (error.code === 'auth/network-request-failed') {
+        errorMessage = "Network error. Please check your connection.";
+      }
+      
       toast({
-        title: "Error",
-        description: error.message,
+        title: "Google Sign-In Error",
+        description: errorMessage,
         variant: "destructive",
       });
     }
@@ -77,7 +109,10 @@ const Auth = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link to="/" className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <Link
+            to="/"
+            className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+          >
             AI Academy by AK
           </Link>
           <p className="text-gray-600 mt-2">Master AI with Expert Guidance</p>
@@ -162,7 +197,7 @@ const Auth = () => {
               disabled={loading}
             >
               <Chrome className="mr-2 h-4 w-4" />
-              Google
+              {loading ? 'Signing in...' : 'Continue with Google'}
             </Button>
 
             <div className="text-center">

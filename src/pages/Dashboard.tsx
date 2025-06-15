@@ -6,9 +6,11 @@ import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, BookOpen, Award, TrendingUp, LogOut } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Dashboard = () => {
   const { user, logout, loading } = useAuth();
+  const { toast } = useToast();
 
   if (loading) {
     return (
@@ -25,8 +27,17 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out.",
+      });
     } catch (error) {
       console.error('Error logging out:', error);
+      toast({
+        title: "Error",
+        description: "Failed to log out. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
