@@ -24,13 +24,14 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/* Vibrant accent for the sidebar, tech-style nav */
 const sidebarLinks = [
   { title: "Dashboard", to: "/dashboard", icon: DashboardIcon },
   { title: "Courses", to: "/courses", icon: CoursesIcon },
-  { title: "Tutorials", to: "/courses/beginner", icon: TutorialsIcon }, // Example, change route as needed
-  { title: "Case Studies", to: "/courses/advanced", icon: CaseStudiesIcon }, // Example, change
-  { title: "Chatbot", to: "/chatbot", icon: ChatbotIcon }, // Example, add this page if exists
-  { title: "Settings", to: "/settings", icon: SettingsIcon }, // Example, add this page if exists
+  { title: "Tutorials", to: "/courses/beginner", icon: TutorialsIcon },
+  { title: "Case Studies", to: "/courses/advanced", icon: CaseStudiesIcon },
+  { title: "Chatbot", to: "/chatbot", icon: ChatbotIcon },
+  { title: "Settings", to: "/settings", icon: SettingsIcon },
 ];
 
 export function AppSidebar() {
@@ -41,18 +42,23 @@ export function AppSidebar() {
   // Active logic
   const isActive = (to: string) => currentPath === to;
 
-  // If you actually implement Chatbot/Settings, update `to`
   return (
-    <Sidebar className={cn("bg-[#161B22] border-r border-[#232a34] shadow-lg transition-all duration-300", state === "collapsed" ? 'w-14' : 'w-60')} collapsible>
-      <div className="flex items-center justify-between px-4 h-14">
-        <span className={cn("font-bold text-lg text-blue-400 tracking-wide", state === "collapsed" && "opacity-0 pointer-events-none transition")}>
-          AK AI Academy
+    <Sidebar className={cn(
+      "sidebar-glow border-r border-[hsl(var(--sidebar-border))] bg-[hsl(var(--sidebar-background))] transition-all duration-300",
+      state === "collapsed" ? "w-16" : "w-64"
+    )} collapsible>
+      <div className="flex items-center justify-between px-4 h-16 border-b border-[hsl(var(--sidebar-border))]">
+        <span className={cn(
+          "font-black text-xl tracking-tight bg-gradient-to-r from-[#4f8bff] via-[#46c7ff] to-[#00ffd7] bg-clip-text text-transparent select-none transition",
+          state === "collapsed" && "opacity-0 pointer-events-none transition"
+        )}>
+          AK AI
         </span>
-        <SidebarTrigger className="ml-2" />
+        <SidebarTrigger className="ml-2 rounded bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted-foreground))]/10 focus-glow transition" />
       </div>
-      <SidebarContent className="flex flex-col">
+      <SidebarContent className="pt-2 flex flex-col">
         <SidebarGroup>
-          <SidebarGroupLabel className="uppercase text-xs text-blue-300 mt-2 pl-4">
+          <SidebarGroupLabel className="uppercase text-xs tracking-wide text-blue-300 mt-2 pl-4 select-none opacity-80">
             Main Menu
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -64,13 +70,20 @@ export function AppSidebar() {
                       to={link.to}
                       className={({ isActive: navIsActive }) =>
                         cn(
-                          "flex items-center gap-3 px-4 py-2.5 rounded-lg transition hover:bg-blue-900/40 hover:text-blue-400",
-                          (isActive(link.to) || navIsActive) && "bg-gradient-to-r from-blue-800 to-blue-600 text-white shadow-lg",
+                          "flex items-center gap-3 px-4 py-2.5 my-0.5 font-medium rounded-lg transition outline-none",
+                          "hover:bg-gradient-to-r hover:from-[#2e4562]/70 hover:to-[#2fffdc]/10 hover:text-[#44deff] focus-glow",
+                          "active:scale-[.98]",
+                          (isActive(link.to) || navIsActive) ? "bg-gradient-to-r from-blue-700 to-cyan-600/90 text-white shadow-lg card-glow" : "text-[hsl(var(--sidebar-foreground))]/90"
                         )
                       }
                     >
-                      <link.icon className="w-5 h-5" />
-                      {state !== "collapsed" && <span>{link.title}</span>}
+                      <link.icon
+                        className={cn(
+                          "w-5 h-5 transition",
+                          (isActive(link.to) || currentPath.startsWith(link.to)) ? "text-accent drop-shadow-[0_0_4px_rgba(79,255,255,0.60)]" : "text-blue-300"
+                        )}
+                      />
+                      {state !== "collapsed" && <span className="tracking-wide">{link.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -79,14 +92,13 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <div className="flex-grow" />
-        {/* Logout button at the bottom */}
+        {/* Logout */}
         <SidebarMenu className="mb-4">
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <NavLink
                 to="/auth"
-                className="flex items-center gap-3 px-4 py-2.5 rounded-lg transition text-red-500 hover:bg-red-900/30 hover:text-red-400"
-                // Implement logout logic in Dashboard top bar!
+                className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-red-500 hover:bg-red-900/30 hover:text-red-300 active:scale-95 transition"
               >
                 <LogoutIcon className="w-5 h-5" />
                 {state !== "collapsed" && <span>Logout</span>}

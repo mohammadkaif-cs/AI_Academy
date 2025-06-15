@@ -30,46 +30,48 @@ export default function Dashboard() {
   return (
     <DashboardLayout>
       {/* Welcome */}
-      <section className="mb-5">
-        <div className="mb-1 text-2xl font-extrabold text-white">Welcome back, {firstName}!</div>
-        <div className="text-sm text-blue-300">Ready to continue your AI journey with AK Academy?</div>
+      <section className="mb-8">
+        <div className="mb-1 text-3xl md:text-4xl font-black text-white drop-shadow-[0_2px_8px_rgba(79,150,255,0.12)]">
+          Welcome back, <span className="text-accent">{firstName}</span>!
+        </div>
+        <div className="text-base text-blue-200 font-medium">Ready to continue your AI journey with <span className="text-accent font-bold">AK Academy</span>?</div>
       </section>
       {/* Stats/Charts Row */}
       <section className="grid grid-cols-1 md:grid-cols-4 gap-7 mb-10">
-        <Card className="bg-gradient-to-br from-[#232a34] to-blue-900 border border-blue-700 shadow-lg hover:shadow-xl transition animate-fade-in">
+        <Card className="card-glow bg-gradient-to-br from-[#232a34] via-[#1b2230] to-[#163040] border-[1.5px] border-blue-700 shadow-lg hover:shadow-xl hover:scale-[1.025] transition duration-300 animate-fade-in">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-sm font-medium text-blue-400">Courses Enrolled</CardTitle>
-            <BookOpen className="h-5 w-5 text-blue-300" />
+            <CardTitle className="text-sm font-semibold text-blue-400">Courses Enrolled</CardTitle>
+            <BookOpen className="h-6 w-6 text-blue-300 drop-shadow-glow" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white">3</div>
-            <div className="text-xs text-blue-200 mt-1">+2 from last month</div>
+            <div className="text-3xl font-black text-white">3</div>
+            <div className="text-xs text-blue-200 mt-1 font-medium">+2 from last month</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-[#232a34] to-purple-900 border border-purple-700 shadow-lg hover:shadow-xl transition animate-fade-in">
+        <Card className="card-glow-accent bg-gradient-to-br from-[#232330] via-[#291f28] to-[#3b1e53] border-[1.5px] border-purple-700 shadow-lg hover:shadow-xl hover:scale-[1.025] transition duration-300 animate-fade-in">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-sm font-medium text-purple-300">Certificates Earned</CardTitle>
-            <Award className="h-5 w-5 text-purple-200" />
+            <CardTitle className="text-sm font-semibold text-purple-200">Certificates Earned</CardTitle>
+            <Award className="h-6 w-6 text-purple-200 drop-shadow-glow" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white">1</div>
-            <div className="text-xs text-purple-300 mt-1">Beginner AI completed</div>
+            <div className="text-3xl font-black text-white">1</div>
+            <div className="text-xs text-purple-200 mt-1 font-medium">Beginner AI completed</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-[#232a34] to-green-900 border border-green-700 shadow-lg hover:shadow-xl transition animate-fade-in">
+        <Card className="card-glow bg-gradient-to-br from-[#1f2e21] via-[#1a332c] to-[#113e32] border-[1.5px] border-green-700 shadow-lg hover:shadow-xl hover:scale-[1.025] transition duration-300 animate-fade-in">
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-sm font-medium text-green-300">Learning Progress</CardTitle>
-            <TrendingUp className="h-5 w-5 text-green-200" />
+            <CardTitle className="text-sm font-semibold text-green-300">Learning Progress</CardTitle>
+            <TrendingUp className="h-6 w-6 text-green-200 drop-shadow-glow" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white">67%</div>
-            <div className="text-xs text-green-200 mt-1">Overall completion</div>
+            <div className="text-3xl font-black text-white">67%</div>
+            <div className="text-xs text-green-200 mt-1 font-medium">Overall completion</div>
           </CardContent>
         </Card>
-        {/* Optional chart (progress bar or mini-bar): */}
-        <Card className="bg-gradient-to-br from-[#232a34] to-blue-900 border border-blue-700 shadow-lg hover:shadow-xl transition animate-fade-in">
+        {/* Optional chart */}
+        <Card className="card-glow bg-gradient-to-br from-[#1a2537] via-[#18324c] to-[#0f2c4e] border-[1.5px] border-blue-800 shadow-lg hover:shadow-xl hover:scale-[1.025] transition duration-300 animate-fade-in">
           <CardHeader>
-            <CardTitle className="text-sm font-medium text-blue-400">Progress Overview</CardTitle>
+            <CardTitle className="text-sm font-semibold text-blue-300">Progress Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={40}>
@@ -77,7 +79,7 @@ export default function Dashboard() {
                 <XAxis dataKey="name" hide />
                 <YAxis hide />
                 <Bar dataKey="value" fill="#4f8bff" radius={[4,4,0,0]} />
-                <RTooltip cursor={{fill: "#222430"}} />
+                <RTooltip cursor={{fill: "#1d2233"}} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -86,27 +88,26 @@ export default function Dashboard() {
       {/* Panels for My Courses, Activity, AI Tools */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-7">
         {/* My Courses */}
-        <Card className="bg-[#181d24] border border-blue-800/40 shadow-md hover:shadow-lg transition">
+        <Card className="card-glow bg-gradient-to-br from-[#1c2130] via-[#232a3c] to-[#22314a] border-[1.5px] border-blue-800/50 shadow-md hover:shadow-lg transition hover:scale-[1.01]">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-blue-400">My Courses</CardTitle>
+            <CardTitle className="text-lg font-bold text-blue-300">My Courses</CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc pl-4 space-y-2 text-white">
-              <li>Intermediate AI (60% completed)</li>
-              <li>Generative AI (20% completed)</li>
-              <li>Beginner Track (Completed)</li>
-              {/* You could map real data here */}
+            <ul className="list-disc pl-4 space-y-2 text-white/90 font-medium">
+              <li>Intermediate AI <span className="ml-2 text-xs text-accent/80">(60% completed)</span></li>
+              <li>Generative AI <span className="ml-2 text-xs text-accent/80">(20% completed)</span></li>
+              <li>Beginner Track <span className="ml-2 text-xs text-green-300">(Completed)</span></li>
             </ul>
             <a href="/courses" className="inline-block mt-4 text-sm text-blue-300 hover:text-blue-200 underline underline-offset-2 transition">Browse All Courses</a>
           </CardContent>
         </Card>
         {/* Recent Activity */}
-        <Card className="bg-[#181d24] border border-purple-800/40 shadow-md hover:shadow-lg transition">
+        <Card className="card-glow-accent bg-gradient-to-br from-[#2c1c30] via-[#322334] to-[#291e38] border-[1.5px] border-purple-800/40 shadow-md hover:shadow-lg transition hover:scale-[1.01]">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-purple-300">Recent Activity</CardTitle>
+            <CardTitle className="text-lg font-bold text-purple-200">Recent Activity</CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 text-white">
+            <ul className="space-y-3 text-white/90 font-medium">
               {recentActivity.map(act => (
                 <li key={act.label} className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse mr-2" />
@@ -118,15 +119,15 @@ export default function Dashboard() {
           </CardContent>
         </Card>
         {/* AI Tools */}
-        <Card className="bg-[#181d24] border border-green-800/40 shadow-md hover:shadow-lg transition">
+        <Card className="card-glow bg-gradient-to-br from-[#162121] via-[#153228] to-[#104e33] border-[1.5px] border-green-800/40 shadow-md hover:shadow-lg transition hover:scale-[1.01]">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold text-green-300">AI Tools</CardTitle>
+            <CardTitle className="text-lg font-bold text-green-200">AI Tools</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
               {aiTools.map(tool => (
                 <li key={tool.name} className="flex gap-3 items-center">
-                  <tool.icon className="w-7 h-7 text-green-400 shadow-glow" />
+                  <tool.icon className="w-7 h-7 text-accent drop-shadow-[0_0_8px_rgba(44,255,218,0.16)]" />
                   <div>
                     <div className="font-semibold text-white">{tool.name}</div>
                     <div className="text-xs text-green-100">{tool.description}</div>
@@ -134,7 +135,7 @@ export default function Dashboard() {
                 </li>
               ))}
             </ul>
-            <a href="/chatbot" className="inline-block mt-4 text-sm text-green-300 hover:text-green-100 underline underline-offset-2 transition">Try the Chatbot</a>
+            <a href="/chatbot" className="inline-block mt-4 text-sm text-green-200 hover:text-accent underline underline-offset-2 transition">Try the Chatbot</a>
           </CardContent>
         </Card>
       </section>
