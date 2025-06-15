@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
@@ -16,10 +17,9 @@ import {
   Home as HomeIcon,
   Book as BookIcon,
   LayoutDashboard as DashboardIcon,
-  Video as TutorialsIcon,
-  Briefcase as CaseStudiesIcon,
   MessageCircle as ChatbotIcon,
   LogOut as LogoutIcon,
+  User as UserIcon, // Added for My Profile
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +28,8 @@ const sidebarLinks = [
   { title: "Home", to: "/", icon: HomeIcon },
   { title: "Courses", to: "/courses", icon: BookIcon },
   { title: "Dashboard", to: "/dashboard", icon: DashboardIcon },
+  { title: "Projects", to: "/projects", icon: BookIcon },      // Added Projects (reuse BookIcon or replace as needed)
+  { title: "My Profile", to: "/profile", icon: UserIcon },     // Added My Profile
   { title: "Chatbot", to: "/chatbot", icon: ChatbotIcon },
 ];
 
@@ -114,3 +116,4 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
