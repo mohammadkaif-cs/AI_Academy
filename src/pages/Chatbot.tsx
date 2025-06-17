@@ -7,11 +7,11 @@ export default function ChatbotPage() {
   return (
     <DashboardLayout>
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center relative">
-        <Bot className="w-14 h-14 text-accent mb-4" />
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
+        <Bot className="w-14 h-14 text-black mb-4" />
+        <h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">
           AI Academy Chatbot
         </h1>
-        <p className="text-blue-200 mb-6 max-w-xl">
+        <p className="text-gray-300 mb-6 max-w-xl">
           Welcome to the Academy Chatbot! Ask anything about your courses, AI concepts, or get quick study help.
         </p>
         {/* Embed the actual chatbot UI */}

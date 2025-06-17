@@ -75,46 +75,43 @@ export default function ProfilePage() {
   } = profile;
 
   return (
-    <div className="max-w-lg mx-auto w-full py-10 px-3 sm:px-6">
+    <div className="max-w-lg mx-auto w-full py-10 px-3 sm:px-6 bg-white min-h-screen">
       <ProfileBackToDashboardButton />
       <div
         className="
-          bg-white/10 backdrop-blur-lg border border-white/20
-          rounded-2xl shadow-xl glassmorphism-profile-card
+          bg-white border border-gray-200 shadow-sm
+          rounded-2xl
           px-9 py-10 flex flex-col items-center gap-7
         "
-        style={{
-          boxShadow: "0 8px 32px 0 hsl(var(--glow)/0.12), 0 0 1.5px 0 hsl(var(--glow)/0.30)"
-        }}
       >
-        <Avatar className="h-24 w-24 shadow-lg ring-2 ring-white/40">
+        <Avatar className="h-24 w-24 shadow-sm ring-2 ring-gray-200">
           {photoUrl ? (
             <AvatarImage src={photoUrl} alt="Profile Photo" />
           ) : (
             <AvatarFallback>
-              <User className="w-10 h-10 text-muted-foreground" />
+              <User className="w-10 h-10 text-gray-600" />
             </AvatarFallback>
           )}
         </Avatar>
         <div className="w-full text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold">{fullName || "Your Name"}</h2>
-          {role && <div className="mt-2 text-primary font-medium">{role}</div>}
-          {status && <div className="mt-1 text-sm text-muted-foreground">{status}</div>}
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">{fullName || "Your Name"}</h2>
+          {role && <div className="mt-2 text-black font-medium">{role}</div>}
+          {status && <div className="mt-1 text-sm text-gray-600">{status}</div>}
         </div>
         {bio && (
-          <div className="max-w-prose text-base text-center text-muted-foreground">{bio}</div>
+          <div className="max-w-prose text-base text-center text-gray-600">{bio}</div>
         )}
         <div className="flex flex-col gap-2 w-full items-center text-sm mt-2">
           {email && (
             <div>
               <span className="font-medium">Email: </span>
-              <span className="text-muted-foreground">{email}</span>
+              <span className="text-gray-600">{email}</span>
             </div>
           )}
           {username && (
             <div>
               <span className="font-medium">Username: </span>
-              <span className="text-muted-foreground">{username}</span>
+              <span className="text-gray-600">{username}</span>
             </div>
           )}
           {linkedin && (
@@ -124,7 +121,7 @@ export default function ProfilePage() {
                 href={linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary underline"
+                className="text-black underline"
               >
                 {linkedin}
               </a>
@@ -137,7 +134,7 @@ export default function ProfilePage() {
                 href={github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary underline"
+                className="text-black underline"
               >
                 {github}
               </a>
@@ -146,13 +143,13 @@ export default function ProfilePage() {
           {resumeName && resumeName !== "No file chosen" && (
             <div>
               <span className="font-medium">Resume: </span>
-              <span className="text-muted-foreground">{resumeName}</span>
+              <span className="text-gray-600">{resumeName}</span>
             </div>
           )}
         </div>
         <Button
           variant="outline"
-          className="rounded-full px-7 py-2 font-semibold mt-3 shadow bg-white/15 backdrop-blur text-foreground border border-white/20 hover:bg-white/30 transition-all"
+          className="rounded-full px-7 py-2 font-medium mt-3 shadow-sm bg-white text-gray-900 border border-gray-300 hover:bg-gray-50 transition-all"
           onClick={() => navigate("/profile/edit")}
         >
           Edit Profile

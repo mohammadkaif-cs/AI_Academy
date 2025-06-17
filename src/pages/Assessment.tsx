@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -43,49 +44,49 @@ const Assessment = () => {
       score: "0-20%",
       description: "New to AI with little to no experience",
       recommendation: "Start with our Beginner Track",
-      color: "bg-red-100 text-red-800"
+      color: "bg-red-50 text-red-800 border-red-200"
     },
     {
-      level: "Basic Understanding",
+      level: "Basic Understanding", 
       score: "21-40%",
       description: "Some exposure to AI concepts but limited practical experience",
       recommendation: "Begin with foundational courses, then progress to Intermediate",
-      color: "bg-orange-100 text-orange-800"
+      color: "bg-orange-50 text-orange-800 border-orange-200"
     },
     {
       level: "Intermediate Knowledge",
-      score: "41-70%",
+      score: "41-70%", 
       description: "Good grasp of basics with some hands-on experience",
       recommendation: "Skip to Intermediate Track or specialized areas",
-      color: "bg-yellow-100 text-yellow-800"
+      color: "bg-yellow-50 text-yellow-800 border-yellow-200"
     },
     {
       level: "Advanced Practitioner",
       score: "71-85%",
-      description: "Strong AI knowledge with practical implementation experience",
+      description: "Strong AI knowledge with practical implementation experience", 
       recommendation: "Focus on Advanced Track and specialized domains",
-      color: "bg-green-100 text-green-800"
+      color: "bg-green-50 text-green-800 border-green-200"
     },
     {
       level: "Expert Level",
       score: "86-100%",
       description: "Comprehensive AI expertise with extensive practical experience",
       recommendation: "Consider our instructor program or specialized certifications",
-      color: "bg-blue-100 text-blue-800"
+      color: "bg-blue-50 text-blue-800 border-blue-200"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
       
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <Brain className="w-20 h-20 text-blue-600 mx-auto mb-6" />
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              <Brain className="w-20 h-20 text-black mx-auto mb-6" />
+              <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
                 AI Skill Assessment
               </h1>
               <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-8">
@@ -106,7 +107,7 @@ const Assessment = () => {
                   <span>Instant results</span>
                 </div>
               </div>
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8"
+              <Button size="lg" className="bg-black hover:bg-gray-800 text-white px-8"
                 onClick={() => navigate("/assessment/skill-test")}>
                 Start Free Assessment
               </Button>
@@ -115,10 +116,10 @@ const Assessment = () => {
         </section>
 
         {/* What We Evaluate */}
-        <section className="py-20">
+        <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-semibold text-gray-900 mb-4">
                 What We Evaluate
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -128,18 +129,18 @@ const Assessment = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {assessmentAreas.map((area, index) => (
-                <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow">
+                <Card key={index} className="shadow-sm border border-gray-200 hover:shadow-md transition-shadow bg-white">
                   <CardHeader>
-                    <CardTitle className="text-xl">{area.title}</CardTitle>
+                    <CardTitle className="text-xl font-semibold">{area.title}</CardTitle>
                     <p className="text-gray-600">{area.description}</p>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
-                      <h4 className="font-semibold text-gray-900">Key Topics:</h4>
+                      <h4 className="font-medium text-gray-900">Key Topics:</h4>
                       <ul className="space-y-1">
                         {area.topics.map((topic, i) => (
                           <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                            <CheckCircle className="w-4 h-4 text-black flex-shrink-0" />
                             {topic}
                           </li>
                         ))}
@@ -153,10 +154,10 @@ const Assessment = () => {
         </section>
 
         {/* Skill Levels */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-semibold text-gray-900 mb-4">
                 Understanding Your Results
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -167,13 +168,13 @@ const Assessment = () => {
 
             <div className="space-y-6">
               {skillLevels.map((level, index) => (
-                <Card key={index} className="shadow-lg">
+                <Card key={index} className="shadow-sm border border-gray-200 bg-white">
                   <CardContent className="p-6">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-4 mb-2">
-                          <Badge className={level.color}>{level.level}</Badge>
-                          <Badge variant="outline">{level.score}</Badge>
+                          <Badge className={level.color + " border"}>{level.level}</Badge>
+                          <Badge variant="outline" className="border-gray-300">{level.score}</Badge>
                         </div>
                         <p className="text-gray-600 mb-2">{level.description}</p>
                         <p className="text-sm text-gray-500">
@@ -189,10 +190,10 @@ const Assessment = () => {
         </section>
 
         {/* How It Works */}
-        <section className="py-20">
+        <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-semibold text-gray-900 mb-4">
                 How It Works
               </h2>
             </div>
@@ -220,12 +221,12 @@ const Assessment = () => {
                   description: "Begin your AI journey with content perfectly matched to your needs"
                 }
               ].map((step, index) => (
-                <Card key={index} className="text-center shadow-lg">
+                <Card key={index} className="text-center shadow-sm border border-gray-200 bg-white">
                   <CardHeader>
-                    <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">
+                    <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-semibold text-lg mx-auto mb-4">
                       {step.step}
                     </div>
-                    <CardTitle className="text-lg">{step.title}</CardTitle>
+                    <CardTitle className="text-lg font-semibold">{step.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600 text-sm">{step.description}</p>
@@ -237,17 +238,17 @@ const Assessment = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <section className="py-20 bg-black text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl font-bold mb-4">Ready to Discover Your AI Level?</h2>
+            <h2 className="text-4xl font-semibold mb-4">Ready to Discover Your AI Level?</h2>
             <p className="text-xl opacity-90 mb-8">
               Take our comprehensive assessment and get personalized recommendations for your AI learning journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="px-8">
+              <Button size="lg" variant="secondary" className="px-8 bg-white text-black hover:bg-gray-100">
                 Start Free Assessment
               </Button>
-              <Button size="lg" variant="outline" className="px-8 text-white border-white hover:bg-white hover:text-blue-600">
+              <Button size="lg" variant="outline" className="px-8 text-white border-white hover:bg-white hover:text-black">
                 View Sample Questions
               </Button>
             </div>

@@ -11,15 +11,15 @@ import { Mail, Phone, MapPin, MessageCircle, Clock, Users } from "lucide-react";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
       
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 mb-6">
                 Get in Touch
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
@@ -31,13 +31,13 @@ const Contact = () => {
         </section>
 
         {/* Contact Form & Info */}
-        <section className="py-20">
+        <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
-              <Card className="shadow-lg">
+              <Card className="shadow-sm border border-gray-200 bg-white">
                 <CardHeader>
-                  <CardTitle className="text-2xl">Send us a Message</CardTitle>
+                  <CardTitle className="text-2xl font-semibold">Send us a Message</CardTitle>
                   <p className="text-gray-600">
                     Fill out the form below and we'll get back to you within 24 hours.
                   </p>
@@ -78,7 +78,7 @@ const Contact = () => {
                     />
                   </div>
                   
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Button className="w-full bg-black hover:bg-gray-800">
                     Send Message
                   </Button>
                 </CardContent>
@@ -86,13 +86,13 @@ const Contact = () => {
 
               {/* Contact Information */}
               <div className="space-y-8">
-                <Card className="shadow-lg">
+                <Card className="shadow-sm border border-gray-200 bg-white">
                   <CardHeader>
-                    <CardTitle className="text-xl">Contact Information</CardTitle>
+                    <CardTitle className="text-xl font-semibold">Contact Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-blue-600" />
+                      <Mail className="w-5 h-5 text-black" />
                       <div>
                         <p className="font-medium">Email</p>
                         <p className="text-gray-600">hello@aiacademyak.com</p>
@@ -100,7 +100,7 @@ const Contact = () => {
                     </div>
                     
                     <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-blue-600" />
+                      <Phone className="w-5 h-5 text-black" />
                       <div>
                         <p className="font-medium">Phone</p>
                         <p className="text-gray-600">+1 (555) 123-4567</p>
@@ -108,7 +108,7 @@ const Contact = () => {
                     </div>
                     
                     <div className="flex items-center gap-3">
-                      <MessageCircle className="w-5 h-5 text-blue-600" />
+                      <MessageCircle className="w-5 h-5 text-black" />
                       <div>
                         <p className="font-medium">WhatsApp</p>
                         <p className="text-gray-600">+1 (555) 123-4567</p>
@@ -116,7 +116,7 @@ const Contact = () => {
                     </div>
                     
                     <div className="flex items-center gap-3">
-                      <MapPin className="w-5 h-5 text-blue-600" />
+                      <MapPin className="w-5 h-5 text-black" />
                       <div>
                         <p className="font-medium">Address</p>
                         <p className="text-gray-600">
@@ -128,27 +128,27 @@ const Contact = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="shadow-lg">
+                <Card className="shadow-sm border border-gray-200 bg-white">
                   <CardHeader>
-                    <CardTitle className="text-xl">Office Hours</CardTitle>
+                    <CardTitle className="text-xl font-semibold">Office Hours</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-blue-600" />
+                      <Clock className="w-5 h-5 text-black" />
                       <div>
                         <p className="font-medium">Monday - Friday</p>
                         <p className="text-gray-600">9:00 AM - 6:00 PM PST</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-blue-600" />
+                      <Clock className="w-5 h-5 text-black" />
                       <div>
                         <p className="font-medium">Saturday</p>
                         <p className="text-gray-600">10:00 AM - 4:00 PM PST</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-blue-600" />
+                      <Clock className="w-5 h-5 text-black" />
                       <div>
                         <p className="font-medium">Sunday</p>
                         <p className="text-gray-600">Closed</p>
@@ -157,17 +157,17 @@ const Contact = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="shadow-lg">
+                <Card className="shadow-sm border border-gray-200 bg-white">
                   <CardHeader>
-                    <CardTitle className="text-xl">Quick Links</CardTitle>
+                    <CardTitle className="text-xl font-semibold">Quick Links</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">
-                      <Button variant="outline" className="w-full justify-start">
+                      <Button variant="outline" className="w-full justify-start border-gray-300 hover:bg-gray-50">
                         <MessageCircle className="w-4 h-4 mr-2" />
                         Chat with our AI Assistant
                       </Button>
-                      <Button variant="outline" className="w-full justify-start">
+                      <Button variant="outline" className="w-full justify-start border-gray-300 hover:bg-gray-50">
                         <Users className="w-4 h-4 mr-2" />
                         Schedule a Demo
                       </Button>
@@ -180,10 +180,10 @@ const Contact = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-4">
                 Frequently Asked Questions
               </h2>
               <p className="text-lg text-gray-600">
@@ -192,9 +192,9 @@ const Contact = () => {
             </div>
 
             <div className="space-y-6">
-              <Card className="shadow-lg">
+              <Card className="shadow-sm border border-gray-200 bg-white">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">
+                  <h3 className="font-medium text-gray-900 mb-2">
                     How do I choose the right AI course for my level?
                   </h3>
                   <p className="text-gray-600">
@@ -205,9 +205,9 @@ const Contact = () => {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-lg">
+              <Card className="shadow-sm border border-gray-200 bg-white">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">
+                  <h3 className="font-medium text-gray-900 mb-2">
                     Do I need programming experience to start?
                   </h3>
                   <p className="text-gray-600">
@@ -261,17 +261,17 @@ const Contact = () => {
         </section>
 
         {/* Map Section */}
-        <section className="py-20">
+        <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Visit Our Office</h2>
+              <h2 className="text-3xl font-semibold text-gray-900 mb-4">Visit Our Office</h2>
               <p className="text-lg text-gray-600">
                 Located in the heart of Silicon Valley's tech district.
               </p>
             </div>
             
-            <Card className="shadow-lg overflow-hidden">
-              <div className="h-96 bg-gray-200 flex items-center justify-center">
+            <Card className="shadow-sm border border-gray-200 overflow-hidden bg-white">
+              <div className="h-96 bg-gray-100 flex items-center justify-center">
                 <div className="text-center text-gray-500">
                   <MapPin className="w-16 h-16 mx-auto mb-4" />
                   <p className="text-lg font-medium">Interactive Map</p>
