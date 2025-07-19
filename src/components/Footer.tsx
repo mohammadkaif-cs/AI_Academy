@@ -10,8 +10,8 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-xl font-semibold mb-4 text-gray-900">
-              AI Academy by AK
+            <h3 className="text-xl font-semibold mb-4 text-foreground">
+              AI Academy
             </h3>
             <p className="text-gray-600 mb-6 max-w-md leading-relaxed">
               Empowering the next generation of AI professionals through comprehensive, 
@@ -115,7 +115,7 @@ export const Footer = () => {
         
         <div className="border-t border-gray-200 mt-8 pt-8 text-center">
           <p className="text-gray-600 text-sm">
-            © {currentYear} AI Academy by AK. All rights reserved. |{" "}
+            © {currentYear} AI Academy. All rights reserved. |{" "}
             <a href="#" className="hover:text-gray-900 transition-colors duration-200">
               Privacy Policy
             </a>{" "}

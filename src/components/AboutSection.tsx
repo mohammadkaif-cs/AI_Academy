@@ -9,11 +9,11 @@ export const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-              About AI Academy by AK
+              About AI Academy
             </h2>
             <div className="space-y-8 text-gray-700 font-inter">
               <p className="text-lg leading-relaxed">
-                AI Academy by AK was founded with a clear mission: to democratize artificial intelligence 
+                AI Academy was founded with a clear mission: to democratize artificial intelligence 
                 education and make cutting-edge AI knowledge accessible to learners worldwide. In an era 
                 where AI is reshaping every industry, we believe that quality education should be the 
                 bridge between complex AI concepts and practical, real-world applications.

@@ -43,7 +43,7 @@ const Auth = () => {
         await createUserWithEmailAndPassword(auth, data.email, data.password);
         toast({
           title: "Account Created!",
-          description: "Welcome to AI Academy by AK!",
+          description: "Welcome to AI Academy!",
         });
         navigate('/dashboard');
       }

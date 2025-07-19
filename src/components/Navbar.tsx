@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { User, LogOut, Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,17 +33,17 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link
                 to="/"
-                className="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-200"
+                className="text-2xl font-bold text-foreground hover:text-primary transition-colors duration-200"
                 onClick={closeMenu}
               >
-                AI Academy by AK
+                AI Academy
               </Link>
             </div>
 
@@ -56,8 +57,8 @@ export const Navbar = () => {
                     className={cn(
                       "px-3 py-2 text-sm font-medium transition-all duration-200 rounded-md",
                       location.pathname === item.path
-                        ? "text-blue-600 bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                        ? "text-primary bg-accent"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
                     )}
                   >
                     {item.name}
@@ -68,10 +69,11 @@ export const Navbar = () => {
 
             {/* Auth Section */}
             <div className="hidden md:flex items-center space-x-4">
+              <ThemeToggle />
               {user ? (
                 <div className="flex items-center space-x-4">
                   <Link to="/dashboard">
-                    <Button variant="ghost" size="sm" className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200">
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-200">
                       <User className="w-4 h-4 mr-2" />
                       Dashboard
                     </Button>
@@ -80,7 +82,7 @@ export const Navbar = () => {
                     onClick={handleLogout} 
                     variant="outline" 
                     size="sm"
-                    className="hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-all duration-200"
+                    className="hover:bg-destructive/10 hover:text-destructive hover:border-destructive transition-all duration-200"
                   >
                     <LogOut className="w-4 h-4 mr-2" />
                     Logout
@@ -99,7 +101,7 @@ export const Navbar = () => {
             <div className="md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-700 hover:text-blue-600 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-all duration-200"
+                className="text-muted-foreground hover:text-foreground focus:outline-none p-2 rounded-md hover:bg-accent transition-all duration-200"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
               >
                 {isOpen ? (
@@ -117,7 +119,7 @@ export const Navbar = () => {
           "md:hidden transition-all duration-300 ease-in-out",
           isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
         )}>
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200 shadow-lg">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border shadow-lg">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -126,8 +128,8 @@ export const Navbar = () => {
                 className={cn(
                   "block px-3 py-3 text-base font-medium transition-all duration-200 w-full text-left rounded-md",
                   location.pathname === item.path
-                    ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600"
-                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    ? "text-primary bg-accent border-l-4 border-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 )}
               >
                 {item.name}
@@ -135,13 +137,17 @@ export const Navbar = () => {
             ))}
             
             {/* Mobile Auth */}
-            <div className="pt-4 border-t border-gray-200 mt-4">
+            <div className="pt-4 border-t border-border mt-4">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-sm font-medium text-muted-foreground">Theme</span>
+                <ThemeToggle />
+              </div>
               {user ? (
                 <div className="space-y-2">
                   <Link
                     to="/dashboard"
                     onClick={closeMenu}
-                    className="flex items-center px-3 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-all duration-200"
+                    className="flex items-center px-3 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-all duration-200"
                   >
                     <User className="w-5 h-5 mr-3" />
                     Dashboard
@@ -151,7 +157,7 @@ export const Navbar = () => {
                       handleLogout();
                       closeMenu();
                     }}
-                    className="flex items-center w-full text-left px-3 py-3 text-base font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-md transition-all duration-200"
+                    className="flex items-center w-full text-left px-3 py-3 text-base font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-all duration-200"
                   >
                     <LogOut className="w-5 h-5 mr-3" />
                     Logout
@@ -161,7 +167,7 @@ export const Navbar = () => {
                 <Link
                   to="/auth"
                   onClick={closeMenu}
-                  className="block px-3 py-3 text-base font-medium bg-blue-600 text-white rounded-md text-center hover:bg-blue-700 transition-colors duration-200"
+                  className="block px-3 py-3 text-base font-medium bg-primary text-primary-foreground rounded-md text-center hover:bg-primary/90 transition-colors duration-200"
                 >
                   Sign In
                 </Link>

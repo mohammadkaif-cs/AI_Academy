@@ -26,7 +26,7 @@ export const Hero = () => {
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed font-inter">
             From beginner-friendly introductions to advanced deep learning concepts, 
-            AI Academy by AK provides comprehensive, hands-on education in artificial intelligence, 
+            AI Academy provides comprehensive, hands-on education in artificial intelligence, 
             machine learning, and emerging AI technologies.
           </p>
           <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-20">
