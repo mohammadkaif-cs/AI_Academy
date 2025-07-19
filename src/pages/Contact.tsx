@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Chatbot } from "@/components/Chatbot";
@@ -8,10 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin, MessageCircle, Clock, Users } from "lucide-react";
-
 const Contact = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       <div className="pt-16">
@@ -71,11 +68,7 @@ const Contact = () => {
                   
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Tell us more about your AI learning goals or questions..."
-                      rows={6}
-                    />
+                    <Textarea id="message" placeholder="Tell us more about your AI learning goals or questions..." rows={6} />
                   </div>
                   
                   <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
@@ -95,7 +88,7 @@ const Contact = () => {
                       <Mail className="w-5 h-5 text-foreground" />
                       <div>
                         <p className="font-medium text-card-foreground">Email</p>
-                        <p className="text-muted-foreground">hello@aiacademyak.com</p>
+                        <p className="text-muted-foreground">kaifikrar333@gmail.com</p>
                       </div>
                     </div>
                     
@@ -103,7 +96,7 @@ const Contact = () => {
                       <Phone className="w-5 h-5 text-foreground" />
                       <div>
                         <p className="font-medium text-card-foreground">Phone</p>
-                        <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                        <p className="text-muted-foreground">+91 7066380503</p>
                       </div>
                     </div>
                     
@@ -111,7 +104,7 @@ const Contact = () => {
                       <MessageCircle className="w-5 h-5 text-foreground" />
                       <div>
                         <p className="font-medium text-card-foreground">WhatsApp</p>
-                        <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                        <p className="text-muted-foreground">+91 7066380503</p>
                       </div>
                     </div>
                     
@@ -286,8 +279,6 @@ const Contact = () => {
 
       <Footer />
       <Chatbot />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
