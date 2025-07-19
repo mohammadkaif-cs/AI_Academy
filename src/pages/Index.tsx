@@ -7,9 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { ArrowRight, BookOpen, Users, Award, User, Star, Play, CheckCircle } from "lucide-react";
-
 const Index = () => {
-  const { user } = useAuth();
+  const {
+    user
+  } = useAuth();
 
   // Extract first name from email (part before @)
   const getFirstName = (email: string) => {
@@ -18,18 +19,14 @@ const Index = () => {
     const firstName = emailPrefix.replace(/\./g, '').toLowerCase();
     return firstName.charAt(0).toUpperCase() + firstName.slice(1);
   };
-
   const firstName = user?.displayName || getFirstName(user?.email || '');
-
-  return (
-    <div className="min-h-screen bg-white flex flex-col">
+  return <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
       
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {user ? (
-            <>
+          {user ? <>
               <h1 className="text-5xl md:text-6xl font-normal mb-6 text-gray-900 leading-tight">
                 Welcome back, <span className="text-gray-700">{firstName}</span>
               </h1>
@@ -49,9 +46,7 @@ const Index = () => {
                   </Button>
                 </Link>
               </div>
-            </>
-          ) : (
-            <>
+            </> : <>
               <h1 className="text-5xl md:text-6xl font-normal mb-6 text-gray-900 leading-tight">
                 Master Artificial Intelligence
               </h1>
@@ -72,8 +67,7 @@ const Index = () => {
                   </Button>
                 </Link>
               </div>
-            </>
-          )}
+            </>}
         </div>
       </section>
 
@@ -254,10 +248,9 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-black">
+      <section className="py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {user ? (
-            <>
+          {user ? <>
               <h2 className="text-4xl font-normal text-white mb-6">Continue Your Journey</h2>
               <p className="text-xl text-gray-300 mb-8">
                 Access your dashboard and continue learning AI.
@@ -274,9 +267,7 @@ const Index = () => {
                   </Button>
                 </Link>
               </div>
-            </>
-          ) : (
-            <>
+            </> : <>
               <h2 className="text-4xl font-normal text-white mb-6">Start Learning Today</h2>
               <p className="text-xl text-gray-300 mb-8">
                 Join thousands of students mastering AI with our comprehensive courses.
@@ -293,14 +284,11 @@ const Index = () => {
                   </Button>
                 </Link>
               </div>
-            </>
-          )}
+            </>}
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
