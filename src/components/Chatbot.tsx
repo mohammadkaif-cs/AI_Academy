@@ -3,44 +3,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-
 interface Message {
   id: number;
   text: string;
   isUser: boolean;
   timestamp: Date;
 }
-
 export const Chatbot = () => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      text: "Hi! I'm your AI learning assistant. I can help you navigate our courses, answer questions about AI concepts, or guide you to the right learning path. What would you like to know?",
-      isUser: false,
-      timestamp: new Date()
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([{
+    id: 1,
+    text: "Hi! I'm your AI learning assistant. I can help you navigate our courses, answer questions about AI concepts, or guide you to the right learning path. What would you like to know?",
+    isUser: false,
+    timestamp: new Date()
+  }]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-
-  const quickActions = [
-    "What course should I start with?",
-    "Explain machine learning basics",
-    "How long do courses take?",
-    "Do you offer certificates?",
-    "What's the difference between AI and ML?"
-  ];
-
+  const quickActions = ["What course should I start with?", "Explain machine learning basics", "How long do courses take?", "Do you offer certificates?", "What's the difference between AI and ML?"];
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
-
     const userMessage: Message = {
       id: messages.length + 1,
       text: inputValue,
       isUser: true,
       timestamp: new Date()
     };
-
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
     setIsTyping(true);
@@ -58,10 +44,8 @@ export const Chatbot = () => {
       setIsTyping(false);
     }, 1500);
   };
-
   const generateAIResponse = (input: string): string => {
     const lowerInput = input.toLowerCase();
-    
     if (lowerInput.includes("course") || lowerInput.includes("start") || lowerInput.includes("recommend")) {
       return "Great question! I'd recommend starting with our AI Skill Assessment to get personalized course recommendations. For complete beginners, our 'Beginner Track' is perfect, while those with some tech background might jump into 'Intermediate Track'. Would you like me to guide you to the assessment?";
     } else if (lowerInput.includes("machine learning") || lowerInput.includes("ml")) {
@@ -90,110 +74,14 @@ export const Chatbot = () => {
       return "That's an interesting question! While I can help with course navigation and basic AI concepts, I'd be happy to connect you with our expert instructors for more detailed technical questions. You can also browse our comprehensive course materials. Is there a specific course topic I can guide you to?";
     }
   };
-
   const handleQuickAction = (action: string) => {
     setInputValue(action);
   };
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
-
-  return (
-    <Card className="w-full max-w-lg h-[500px] mx-auto shadow-2xl border-2 border-blue-100">
-      <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
-        <div className="flex justify-between items-center">
-          <div>
-            <CardTitle className="text-lg">AI Learning Assistant</CardTitle>
-            <div className="flex items-center gap-2 mt-1">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-xs text-blue-100">Online</span>
-            </div>
-          </div>
-        </div>
-      </CardHeader>
-      
-      <CardContent className="flex flex-col h-full p-0">
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={cn(
-                "flex",
-                message.isUser ? "justify-end" : "justify-start"
-              )}
-            >
-              <div
-                className={cn(
-                  "max-w-[80%] p-3 rounded-lg text-sm leading-relaxed",
-                  message.isUser
-                    ? "bg-blue-600 text-white rounded-br-sm"
-                    : "bg-white text-gray-900 border shadow-sm rounded-bl-sm"
-                )}
-              >
-                {message.text}
-              </div>
-            </div>
-          ))}
-          
-          {/* Typing Indicator */}
-          {isTyping && (
-            <div className="flex justify-start">
-              <div className="bg-white border shadow-sm p-3 rounded-lg rounded-bl-sm">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Quick Actions */}
-        {messages.length === 1 && !isTyping && (
-          <div className="px-4 pb-2 bg-white border-t">
-            <p className="text-xs text-gray-500 mb-2">Quick questions:</p>
-            <div className="flex flex-wrap gap-1">
-              {quickActions.slice(0, 3).map((action, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleQuickAction(action)}
-                  className="text-xs px-3 py-1 bg-blue-50 hover:bg-blue-100 rounded-full text-blue-700 transition-colors border border-blue-200"
-                >
-                  {action}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Input */}
-        <div className="p-4 border-t bg-white">
-          <div className="flex gap-2">
-            <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Ask me anything about AI learning..."
-              onKeyPress={handleKeyPress}
-              className="flex-1 border-gray-200 focus:border-blue-500"
-              disabled={isTyping}
-            />
-            <Button 
-              onClick={handleSendMessage}
-              size="sm"
-              className="bg-blue-600 hover:bg-blue-700 px-4"
-              disabled={isTyping || !inputValue.trim()}
-            >
-              {isTyping ? "..." : "Send"}
-            </Button>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
+  return;
 };
