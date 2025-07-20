@@ -47,8 +47,8 @@ export default function ProfilePage() {
     } else if (user) {
       setProfile(prev => ({
         ...prev,
-        fullName: user.displayName || "",
-        photoUrl: user.photoURL || "",
+        fullName: user.user_metadata?.display_name || user.user_metadata?.full_name || "",
+        photoUrl: user.user_metadata?.avatar_url || "",
         email: user.email || "",
       }));
     }

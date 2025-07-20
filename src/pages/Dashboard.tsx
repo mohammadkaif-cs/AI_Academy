@@ -25,8 +25,9 @@ const aiTools = [
 
 export default function Dashboard() {
   const { user } = useAuth();
-  // Avatar logic
-  const firstName = user?.displayName?.split(" ")[0]
+  // Avatar logic - using Supabase user properties
+  const firstName = user?.user_metadata?.display_name?.split(" ")[0]
+    || user?.user_metadata?.full_name?.split(" ")[0]
     || user?.email?.split("@")[0]?.replace(/\./g, '').toUpperCase();
 
   // BEST SCORE STATE (NEW)

@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '@/lib/firebase';
+import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -33,17 +32,32 @@ const Auth = () => {
     setLoading(true);
     try {
       if (isLogin) {
-        await signInWithEmailAndPassword(auth, data.email, data.password);
+        const { error } = await supabase.auth.signInWithPassword({
+          email: data.email,
+          password: data.password,
+        });
+        
+        if (error) throw error;
+        
         toast({
           title: "Welcome back!",
           description: "Successfully signed in to AI Academy",
         });
         navigate('/dashboard');
       } else {
-        await createUserWithEmailAndPassword(auth, data.email, data.password);
+        const { error } = await supabase.auth.signUp({
+          email: data.email,
+          password: data.password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`
+          }
+        });
+        
+        if (error) throw error;
+        
         toast({
           title: "Account Created!",
-          description: "Welcome to AI Academy!",
+          description: "Welcome to AI Academy! Please check your email to confirm your account.",
         });
         navigate('/dashboard');
       }
@@ -51,16 +65,16 @@ const Auth = () => {
       console.error('Auth error:', error);
       let errorMessage = "An error occurred. Please try again.";
       
-      if (error.code === 'auth/user-not-found') {
-        errorMessage = "No account found with this email.";
-      } else if (error.code === 'auth/wrong-password') {
-        errorMessage = "Incorrect password.";
-      } else if (error.code === 'auth/email-already-in-use') {
+      if (error.message?.includes('Invalid login credentials')) {
+        errorMessage = "Invalid email or password.";
+      } else if (error.message?.includes('User already registered')) {
         errorMessage = "An account already exists with this email.";
-      } else if (error.code === 'auth/weak-password') {
+      } else if (error.message?.includes('Password should be at least')) {
         errorMessage = "Password should be at least 6 characters.";
-      } else if (error.code === 'auth/invalid-email') {
+      } else if (error.message?.includes('Invalid email')) {
         errorMessage = "Invalid email address.";
+      } else if (error.message) {
+        errorMessage = error.message;
       }
       
       toast({
@@ -76,26 +90,26 @@ const Auth = () => {
     setLoading(true);
     
     try {
-      const result = await signInWithPopup(auth, googleProvider);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/dashboard`
+        }
+      });
+      
+      if (error) throw error;
       
       toast({
         title: "Welcome!",
         description: "Successfully signed in with Google",
       });
-      navigate('/dashboard');
     } catch (error: any) {
       console.error('Google Sign-In error:', error);
       
       let errorMessage = "Google Sign-In failed. Please try again.";
       
-      if (error.code === 'auth/popup-blocked') {
-        errorMessage = "Popup was blocked. Please allow popups and try again.";
-      } else if (error.code === 'auth/popup-closed-by-user') {
-        errorMessage = "Sign-in was cancelled.";
-      } else if (error.code === 'auth/unauthorized-domain') {
-        errorMessage = "This domain is not authorized for Google Sign-In.";
-      } else if (error.code === 'auth/network-request-failed') {
-        errorMessage = "Network error. Please check your connection.";
+      if (error.message) {
+        errorMessage = error.message;
       }
       
       toast({
