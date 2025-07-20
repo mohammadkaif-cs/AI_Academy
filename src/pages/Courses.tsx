@@ -10,7 +10,6 @@ import { Footer } from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
-
 interface Course {
   'Sr no': number;
   Course: string;
@@ -20,16 +19,13 @@ interface Course {
   Price: string;
   Link: string;
 }
-
 interface UserProgress {
   course_id: number;
   progress_percentage: number;
 }
-
 interface UserBookmark {
   course_id: number;
 }
-
 const Courses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
@@ -40,20 +36,22 @@ const Courses = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
   const [selectedFormat, setSelectedFormat] = useState("all");
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
-  const { toast } = useToast();
+  const {
+    user
+  } = useAuth();
+  const {
+    toast
+  } = useToast();
 
   // Fetch courses from Supabase
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const { data, error } = await supabase
-          .from('AI Academy Courses')
-          .select('*')
-          .order('Sr no');
-        
+        const {
+          data,
+          error
+        } = await supabase.from('AI Academy Courses').select('*').order('Sr no');
         if (error) throw error;
-        
         setCourses(data || []);
         setFilteredCourses(data || []);
       } catch (error) {
@@ -61,13 +59,12 @@ const Courses = () => {
         toast({
           title: "Error",
           description: "Failed to load courses. Please try again.",
-          variant: "destructive",
+          variant: "destructive"
         });
       } finally {
         setLoading(false);
       }
     };
-
     fetchCourses();
   }, [toast]);
 
@@ -75,16 +72,13 @@ const Courses = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!user) return;
-
       try {
         // For now, use localStorage to store user data until migration is applied
         const savedProgress = localStorage.getItem(`user_progress_${user.id}`);
         const savedBookmarks = localStorage.getItem(`user_bookmarks_${user.id}`);
-        
         if (savedProgress) {
           setUserProgress(JSON.parse(savedProgress));
         }
-        
         if (savedBookmarks) {
           setUserBookmarks(JSON.parse(savedBookmarks));
         }
@@ -92,7 +86,6 @@ const Courses = () => {
         console.error('Error fetching user data:', error);
       }
     };
-
     fetchUserData();
   }, [user]);
 
@@ -102,10 +95,7 @@ const Courses = () => {
 
     // Search filter
     if (searchTerm) {
-      filtered = filtered.filter(course =>
-        course.Course?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.Topic?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      filtered = filtered.filter(course => course.Course?.toLowerCase().includes(searchTerm.toLowerCase()) || course.Topic?.toLowerCase().includes(searchTerm.toLowerCase()));
     }
 
     // Topic filter
@@ -122,7 +112,6 @@ const Courses = () => {
     if (selectedFormat !== "all") {
       filtered = filtered.filter(course => course.Format === selectedFormat);
     }
-
     setFilteredCourses(filtered);
   }, [courses, searchTerm, selectedTopic, selectedDifficulty, selectedFormat]);
 
@@ -148,33 +137,31 @@ const Courses = () => {
       toast({
         title: "Login Required",
         description: "Please login to bookmark courses.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     try {
       const isBookmarked = isCourseBookmarked(courseId);
-      
       if (isBookmarked) {
         // Remove bookmark
         const newBookmarks = userBookmarks.filter(b => b.course_id !== courseId);
         setUserBookmarks(newBookmarks);
         localStorage.setItem(`user_bookmarks_${user.id}`, JSON.stringify(newBookmarks));
-        
         toast({
           title: "Bookmark Removed",
-          description: "Course removed from your bookmarks.",
+          description: "Course removed from your bookmarks."
         });
       } else {
         // Add bookmark
-        const newBookmarks = [...userBookmarks, { course_id: courseId }];
+        const newBookmarks = [...userBookmarks, {
+          course_id: courseId
+        }];
         setUserBookmarks(newBookmarks);
         localStorage.setItem(`user_bookmarks_${user.id}`, JSON.stringify(newBookmarks));
-        
         toast({
           title: "Bookmark Added",
-          description: "Course added to your bookmarks.",
+          description: "Course added to your bookmarks."
         });
       }
     } catch (error) {
@@ -182,7 +169,7 @@ const Courses = () => {
       toast({
         title: "Error",
         description: "Failed to update bookmark. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
     }
   };
@@ -216,10 +203,8 @@ const Courses = () => {
         return '📄';
     }
   };
-
   if (loading) {
-    return (
-      <div className="min-h-screen bg-white">
+    return <div className="min-h-screen bg-white">
         <Navbar />
         <div className="container mx-auto px-4 py-24">
           <div className="text-center">
@@ -227,12 +212,9 @@ const Courses = () => {
             <p className="mt-4 text-lg text-gray-600">Loading courses...</p>
           </div>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       <Navbar />
       
       {/* Header */}
@@ -253,13 +235,8 @@ const Courses = () => {
             <div className="flex flex-col md:flex-row gap-4 mb-8">
               {/* Search */}
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <Input
-                  placeholder="Search courses..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                />
+                
+                <Input placeholder="Search courses..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 my-0 mx-0" />
               </div>
 
               {/* Filters */}
@@ -270,9 +247,7 @@ const Courses = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Topics</SelectItem>
-                    {topics.map(topic => (
-                      <SelectItem key={topic} value={topic}>{topic}</SelectItem>
-                    ))}
+                    {topics.map(topic => <SelectItem key={topic} value={topic}>{topic}</SelectItem>)}
                   </SelectContent>
                 </Select>
 
@@ -282,9 +257,7 @@ const Courses = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Levels</SelectItem>
-                    {difficulties.map(difficulty => (
-                      <SelectItem key={difficulty} value={difficulty}>{difficulty}</SelectItem>
-                    ))}
+                    {difficulties.map(difficulty => <SelectItem key={difficulty} value={difficulty}>{difficulty}</SelectItem>)}
                   </SelectContent>
                 </Select>
 
@@ -294,9 +267,7 @@ const Courses = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All Formats</SelectItem>
-                    {formats.map(format => (
-                      <SelectItem key={format} value={format}>{format}</SelectItem>
-                    ))}
+                    {formats.map(format => <SelectItem key={format} value={format}>{format}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
@@ -313,20 +284,15 @@ const Courses = () => {
       {/* Courses Grid */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          {filteredCourses.length === 0 ? (
-            <div className="text-center py-12">
+          {filteredCourses.length === 0 ? <div className="text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">No courses found</h3>
               <p className="text-gray-600">Try adjusting your search or filters</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredCourses.map((course) => {
-                const progress = getCourseProgress(course['Sr no']);
-                const isBookmarked = isCourseBookmarked(course['Sr no']);
-
-                return (
-                  <Card key={course['Sr no']} className="hover:shadow-lg transition-all duration-200 border-0 shadow-md bg-white">
+            </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredCourses.map(course => {
+            const progress = getCourseProgress(course['Sr no']);
+            const isBookmarked = isCourseBookmarked(course['Sr no']);
+            return <Card key={course['Sr no']} className="hover:shadow-lg transition-all duration-200 border-0 shadow-md bg-white">
                     <CardHeader className="pb-4">
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex items-center gap-2">
@@ -335,20 +301,9 @@ const Courses = () => {
                             {course.Format}
                           </Badge>
                         </div>
-                        {user && (
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => toggleBookmark(course['Sr no'])}
-                            className="p-1 h-8 w-8"
-                          >
-                            {isBookmarked ? (
-                              <Heart className="h-4 w-4 fill-red-500 text-red-500" />
-                            ) : (
-                              <Bookmark className="h-4 w-4" />
-                            )}
-                          </Button>
-                        )}
+                        {user && <Button variant="ghost" size="sm" onClick={() => toggleBookmark(course['Sr no'])} className="p-1 h-8 w-8">
+                            {isBookmarked ? <Heart className="h-4 w-4 fill-red-500 text-red-500" /> : <Bookmark className="h-4 w-4" />}
+                          </Button>}
                       </div>
                       
                       <CardTitle className="text-lg font-semibold text-gray-900 leading-tight">
@@ -362,71 +317,48 @@ const Courses = () => {
                         <Badge variant="outline" className="text-xs">
                           {course.Topic}
                         </Badge>
-                        {course.Price && (
-                          <Badge variant="outline" className="text-xs font-semibold text-green-600">
+                        {course.Price && <Badge variant="outline" className="text-xs font-semibold text-green-600">
                             {course.Price}
-                          </Badge>
-                        )}
+                          </Badge>}
                       </div>
                     </CardHeader>
 
                     <CardContent className="pt-0">
                       {/* Progress Bar (only for authenticated users) */}
-                      {user && (
-                        <div className="mb-4">
+                      {user && <div className="mb-4">
                           <div className="flex justify-between items-center mb-2">
                             <span className="text-sm text-gray-600">Progress</span>
                             <span className="text-sm font-medium text-gray-900">{progress}%</span>
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-primary h-2 rounded-full transition-all duration-300"
-                              style={{ width: `${progress}%` }}
-                            ></div>
+                            <div className="bg-primary h-2 rounded-full transition-all duration-300" style={{
+                      width: `${progress}%`
+                    }}></div>
                           </div>
-                        </div>
-                      )}
+                        </div>}
 
                       <div className="flex gap-2">
-                        <Button 
-                          asChild
-                          className="flex-1"
-                        >
-                          <a 
-                            href={course.Link} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2"
-                          >
+                        <Button asChild className="flex-1">
+                          <a href={course.Link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                             View Resource
                             <ExternalLink className="h-4 w-4" />
                           </a>
                         </Button>
                         
-                        {!user && (
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            asChild
-                          >
+                        {!user && <Button variant="outline" size="sm" asChild>
                             <a href="/auth">
                               <User className="h-4 w-4" />
                             </a>
-                          </Button>
-                        )}
+                          </Button>}
                       </div>
                     </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          )}
+                  </Card>;
+          })}
+            </div>}
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Courses;
