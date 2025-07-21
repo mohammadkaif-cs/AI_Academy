@@ -14,33 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      "AI Academy Courses": {
+      assessment_scores: {
         Row: {
-          Course: string | null
+          course_id: number
+          id: string
+          score: number
+          taken_at: string | null
+          user_id: string
+        }
+        Insert: {
+          course_id: number
+          id?: string
+          score: number
+          taken_at?: string | null
+          user_id: string
+        }
+        Update: {
+          course_id?: number
+          id?: string
+          score?: number
+          taken_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      courses: {
+        Row: {
           Difficulty: string | null
           Format: string | null
           Link: string | null
           Price: string | null
           "Sr no": number | null
+          title: string | null
           Topic: string | null
         }
         Insert: {
-          Course?: string | null
           Difficulty?: string | null
           Format?: string | null
           Link?: string | null
           Price?: string | null
           "Sr no"?: number | null
+          title?: string | null
           Topic?: string | null
         }
         Update: {
-          Course?: string | null
           Difficulty?: string | null
           Format?: string | null
           Link?: string | null
           Price?: string | null
           "Sr no"?: number | null
+          title?: string | null
           Topic?: string | null
+        }
+        Relationships: []
+      }
+      user_bookmarks: {
+        Row: {
+          course_id: number
+          created_at: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          course_id: number
+          created_at?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          course_id?: number
+          created_at?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_progress: {
+        Row: {
+          completed_at: string | null
+          course_id: number
+          id: string
+          progress_percentage: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          course_id: number
+          id?: string
+          progress_percentage?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          course_id?: number
+          id?: string
+          progress_percentage?: number | null
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
