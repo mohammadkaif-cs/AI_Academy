@@ -40,9 +40,9 @@ const Index = () => {
                     Continue Learning
                   </Button>
                 </Link>
-                <Link to="/assessment">
+                <Link to="/courses">
                   <Button size="lg" variant="outline" className="px-8 py-3 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium">
-                    Take Assessment
+                    Browse Courses
                   </Button>
                 </Link>
               </div>
@@ -261,9 +261,9 @@ const Index = () => {
                     Go to Dashboard
                   </Button>
                 </Link>
-                <Link to="/assessment">
+                <Link to="/courses">
                   <Button size="lg" variant="outline" className="px-8 py-3 border-gray-400 text-gray-300 hover:bg-gray-800 rounded-lg font-medium">
-                    Take Assessment
+                    Browse Courses
                   </Button>
                 </Link>
               </div>

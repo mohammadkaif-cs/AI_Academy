@@ -16,9 +16,6 @@ export const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Courses", path: "/courses" },
-    { name: "AI Skill Assessment", path: "/assessment" },
-    { name: "Readiness Test", path: "/readiness-test" },
-    { name: "Contact", path: "/contact" },
   ];
 
   const handleLogout = async () => {

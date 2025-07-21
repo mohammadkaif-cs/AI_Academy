@@ -474,9 +474,9 @@ const BeginnerTrack = () => {
             build amazing AI-powered projects and advance their careers.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/assessment">
+            <Link to="/dashboard">
               <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
-                Take Skill Assessment First
+                Go to Dashboard
               </Button>
             </Link>
             <Button size="lg" variant="outline">

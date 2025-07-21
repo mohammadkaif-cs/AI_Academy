@@ -93,7 +93,7 @@ export default function Dashboard() {
               <div className="text-xs text-yellow-100 mt-1 font-semibold">
                 Your highest AI Skill Readiness Test result
               </div>
-              <a href="/assessment/skill-test" className="block text-xs text-yellow-300 underline underline-offset-4 mt-2 hover:text-yellow-200 transition">Take Assessment</a>
+              <span className="block text-xs text-yellow-300 mt-2">Assessment feature coming soon</span>
             </CardContent>
           </Card>
         </div>

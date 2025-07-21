@@ -67,16 +67,6 @@ export const Footer = () => {
                   Courses
                 </a>
               </li>
-              <li>
-                <a href="#assessments" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Assessments
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
-                  Contact
-                </a>
-              </li>
             </ul>
           </div>
           
