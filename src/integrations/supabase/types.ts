@@ -16,24 +16,45 @@ export type Database = {
     Tables: {
       assessment_scores: {
         Row: {
+          assessment_type: string | null
+          correct_answers: number | null
           course_id: number
+          created_at: string | null
+          details: Json | null
           id: string
           score: number
           taken_at: string | null
+          time_taken_minutes: number | null
+          total_questions: number | null
+          updated_at: string | null
           user_id: string
         }
         Insert: {
+          assessment_type?: string | null
+          correct_answers?: number | null
           course_id: number
+          created_at?: string | null
+          details?: Json | null
           id?: string
           score: number
           taken_at?: string | null
+          time_taken_minutes?: number | null
+          total_questions?: number | null
+          updated_at?: string | null
           user_id: string
         }
         Update: {
+          assessment_type?: string | null
+          correct_answers?: number | null
           course_id?: number
+          created_at?: string | null
+          details?: Json | null
           id?: string
           score?: number
           taken_at?: string | null
+          time_taken_minutes?: number | null
+          total_questions?: number | null
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: []
@@ -68,6 +89,33 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_bookmarks: {
         Row: {
           course_id: number
@@ -93,24 +141,33 @@ export type Database = {
         Row: {
           completed_at: string | null
           course_id: number
+          created_at: string | null
           id: string
+          last_accessed: string | null
           progress_percentage: number | null
+          started_at: string | null
           updated_at: string | null
           user_id: string
         }
         Insert: {
           completed_at?: string | null
           course_id: number
+          created_at?: string | null
           id?: string
+          last_accessed?: string | null
           progress_percentage?: number | null
+          started_at?: string | null
           updated_at?: string | null
           user_id: string
         }
         Update: {
           completed_at?: string | null
           course_id?: number
+          created_at?: string | null
           id?: string
+          last_accessed?: string | null
           progress_percentage?: number | null
+          started_at?: string | null
           updated_at?: string | null
           user_id?: string
         }

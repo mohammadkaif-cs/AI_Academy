@@ -16,6 +16,7 @@ import ComputerVision from "./pages/courses/ComputerVision"; // updated import p
 import About from "./pages/About";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import Assessment from "./pages/Assessment";
 import NotFound from "./pages/NotFound";
 import * as session from "@/utils/session";
 import { useEffect } from "react";
@@ -75,7 +76,16 @@ const App = () => {
                 {/* Public routes */}
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/courses" element={<Courses />} />
+                <Route path="/courses" element={
+                  <ProtectedRoute>
+                    <Courses />
+                  </ProtectedRoute>
+                } />
+                <Route path="/assessment" element={
+                  <ProtectedRoute>
+                    <Assessment />
+                  </ProtectedRoute>
+                } />
                 
                 {/* Protected routes */}
                 <Route path="/courses/beginner" element={
