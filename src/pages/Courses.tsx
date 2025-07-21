@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 interface Course {
   'Sr no': number;
-  Course: string;
+  title: string;
   Topic: string;
   Format: string;
   Difficulty: string;
@@ -50,7 +50,7 @@ const Courses = () => {
         const {
           data,
           error
-        } = await supabase.from('AI Academy Courses').select('*').order('Sr no');
+        } = await supabase.from('courses').select('*').order('"Sr no"');
         if (error) throw error;
         setCourses(data || []);
         setFilteredCourses(data || []);
@@ -95,7 +95,7 @@ const Courses = () => {
 
     // Search filter
     if (searchTerm) {
-      filtered = filtered.filter(course => course.Course?.toLowerCase().includes(searchTerm.toLowerCase()) || course.Topic?.toLowerCase().includes(searchTerm.toLowerCase()));
+      filtered = filtered.filter(course => course.title?.toLowerCase().includes(searchTerm.toLowerCase()) || course.Topic?.toLowerCase().includes(searchTerm.toLowerCase()));
     }
 
     // Topic filter
@@ -292,7 +292,7 @@ const Courses = () => {
               {filteredCourses.map(course => {
             const progress = getCourseProgress(course['Sr no']);
             const isBookmarked = isCourseBookmarked(course['Sr no']);
-            return <Card key={course['Sr no']} className="hover:shadow-lg transition-all duration-200 border-0 shadow-md bg-white">
+            return <Card key={course['Sr no']} className="border-0 shadow-md bg-white">
                     <CardHeader className="pb-4">
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex items-center gap-2">
@@ -307,7 +307,7 @@ const Courses = () => {
                       </div>
                       
                       <CardTitle className="text-lg font-semibold text-gray-900 leading-tight">
-                        {course.Course}
+                        {course.title}
                       </CardTitle>
                       
                       <div className="flex flex-wrap gap-2 mt-3">
