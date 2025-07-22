@@ -108,35 +108,38 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <Brain className="h-12 w-12 text-primary" />
+          <div className="flex items-center justify-center mb-6">
+            <div className="relative">
+              <Brain className="h-14 w-14 text-primary" />
+              <div className="absolute inset-0 h-14 w-14 bg-primary/20 rounded-full blur-xl"></div>
+            </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground">AI Academy</h1>
-          <p className="text-muted-foreground mt-2">
+          <h1 className="text-4xl font-bold text-foreground mb-2">AI Academy</h1>
+          <p className="text-muted-foreground text-lg">
             {isLogin ? 'Welcome back to your learning journey' : 'Start your AI learning journey today'}
           </p>
         </div>
 
-        <Card className="shadow-lg border-0">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-semibold text-center">
+        <Card className="bg-card/50 backdrop-blur-xl border border-border/50 shadow-2xl rounded-2xl">
+          <CardHeader className="space-y-2 pb-6">
+            <CardTitle className="text-2xl font-bold text-center text-foreground">
               {isLogin ? 'Sign In' : 'Create Account'}
             </CardTitle>
-            <CardDescription className="text-center">
+            <CardDescription className="text-center text-muted-foreground">
               {isLogin 
                 ? 'Enter your credentials to access your account' 
                 : 'Create an account to start learning AI'
               }
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
             <Button
               type="button"
               variant="outline"
-              className="w-full"
+              className="w-full h-12 bg-card hover:bg-muted border-border/50 text-foreground font-medium rounded-xl"
               onClick={handleGoogleSignIn}
               disabled={isLoading}
             >
@@ -170,58 +173,58 @@ const Auth = () => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <div className="space-y-3">
+                <Label htmlFor="email" className="text-sm font-medium text-foreground">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Mail className="absolute left-4 top-4 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    className="pl-10"
+                    className="pl-12 h-12 bg-input border-border/50 rounded-xl text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50"
                     {...register('email')}
                   />
                 </div>
                 {errors.email && (
-                  <p className="text-sm text-destructive">{errors.email.message}</p>
+                  <p className="text-sm text-destructive font-medium">{errors.email.message}</p>
                 )}
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+              <div className="space-y-3">
+                <Label htmlFor="password" className="text-sm font-medium text-foreground">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Lock className="absolute left-4 top-4 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-                    className="pl-10 pr-10"
+                    className="pl-12 pr-12 h-12 bg-input border-border/50 rounded-xl text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary/50"
                     {...register('password')}
                   />
                   <button
                     type="button"
-                    className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                    className="absolute right-4 top-4 text-muted-foreground hover:text-foreground transition-colors"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-sm text-destructive">{errors.password.message}</p>
+                  <p className="text-sm text-destructive font-medium">{errors.password.message}</p>
                 )}
               </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl" disabled={isLoading}>
                 {isLoading ? 'Loading...' : (isLogin ? 'Sign In' : 'Create Account')}
               </Button>
             </form>
 
-            <div className="text-center">
+            <div className="text-center pt-4">
               <button
                 type="button"
                 onClick={toggleMode}
-                className="text-sm text-primary hover:underline"
+                className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
                 disabled={isLoading}
               >
                 {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}

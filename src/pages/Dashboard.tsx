@@ -1,9 +1,26 @@
-import DashboardLayout from "@/components/DashboardLayout";
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Award, TrendingUp, Zap, Send, Bot, Star } from 'lucide-react';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RTooltip } from 'recharts';
-import { useAuth } from '@/contexts/AuthContext';
 import React, { useEffect, useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { 
+  BookOpen, 
+  Award, 
+  Brain, 
+  Star, 
+  TrendingUp, 
+  Clock,
+  Trophy,
+  Users,
+  Target,
+  ArrowRight,
+  Bookmark,
+  PlayCircle
+} from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { Link } from 'react-router-dom';
 
 const statsData = [
   { name: 'Courses', value: 3 },
