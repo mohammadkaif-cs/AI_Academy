@@ -5,86 +5,66 @@
 /* --- OpenAI-inspired dual theme system --- */
 @layer base {
   :root {
-    /* Blue-slate AI Academy theme */
-    --background: 219 39% 11%;
-    --foreground: 0 0% 98%;
-    --primary: 217 91% 60%;
+    /* Light theme (OpenAI style) */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+    --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 215 28% 17%;
-    --secondary-foreground: 0 0% 98%;
-    --card: 216 34% 17%;
-    --card-foreground: 0 0% 98%;
-    --muted: 215 28% 17%;
-    --muted-foreground: 218 11% 65%;
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 98%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 217 32% 17%;
-    --input: 215 28% 17%;
-    --ring: 217 91% 60%;
-    --popover: 216 34% 17%;
-    --popover-foreground: 0 0% 98%;
-    --radius: 0.875rem;
-    --sidebar-background: 216 34% 17%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 217 91% 60%;
+    --border: 0 0% 90%;
+    --input: 0 0% 96%;
+    --ring: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --radius: 0.6rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 9%;
+    --sidebar-primary: 0 0% 9%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 215 28% 17%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 217 32% 17%;
-    --sidebar-ring: 217 91% 60%;
-    
-    /* AI Academy brand colors */
-    --blue-primary: 217 91% 60%;
-    --blue-secondary: 213 94% 68%;
-    --slate-dark: 219 39% 11%;
-    --slate-card: 216 34% 17%;
-    --success: 142 76% 36%;
-    --warning: 38 92% 50%;
-    --glow: 217 91% 60%;
-    --glow-secondary: 213 94% 68%;
+    --sidebar-accent: 0 0% 90%;
+    --sidebar-accent-foreground: 0 0% 9%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 9%;
   }
   
-  .light {
-    /* Light mode for AI Academy */
-    --background: 0 0% 100%;
-    --foreground: 219 39% 11%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 210 40% 98%;
-    --secondary-foreground: 219 39% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 219 39% 11%;
-    --muted: 210 40% 98%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 217 91% 60%;
+  .dark {
+    /* Dark theme - improved contrast */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 84% 60%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 60%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 219 39% 11%;
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 219 39% 11%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 210 40% 98%;
-    --sidebar-accent-foreground: 219 39% 11%;
-    --sidebar-border: 214 32% 91%;
-    --sidebar-ring: 217 91% 60%;
-    
-    /* Light mode brand colors */
-    --blue-primary: 217 91% 60%;
-    --blue-secondary: 213 94% 68%;
-    --slate-dark: 219 39% 11%;
-    --slate-card: 0 0% 100%;
-    --success: 142 76% 36%;
-    --warning: 38 92% 50%;
-    --glow: 217 91% 60%;
-    --glow-secondary: 213 94% 68%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --sidebar-background: 0 0% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 9%;
+    --sidebar-accent: 0 0% 14.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 14.9%;
+    --sidebar-ring: 0 0% 83.1%;
   }
 }
 
@@ -115,7 +95,6 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 

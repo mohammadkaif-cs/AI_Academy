@@ -1,30 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { 
-  BookOpen, 
-  Award, 
-  Brain, 
-  Star, 
-  TrendingUp, 
-  Clock,
-  Trophy,
-  Users,
-  Target,
-  ArrowRight,
-  Bookmark,
-  PlayCircle,
-  MessageCircle,
-  Zap,
-  Mail
-} from 'lucide-react';
+import { BookOpen, Award, TrendingUp, Zap, Send, Bot, Star } from 'lucide-react';
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip as RTooltip } from 'recharts';
 import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import { Link } from 'react-router-dom';
-import DashboardLayout from '@/components/DashboardLayout';
+import React, { useEffect, useState } from 'react';
 
 const statsData = [
   { name: 'Courses', value: 3 },
@@ -39,16 +18,15 @@ const recentActivity = [
 ];
 
 const aiTools = [
-  { icon: MessageCircle, name: "Academy Chatbot", description: "Get quick AI help and answers" },
+  { icon: Bot, name: "Academy Chatbot", description: "Get quick AI help and answers" },
   { icon: Zap, name: "Code Assistant", description: "Generate & debug code" },
-  { icon: Mail, name: "Essay Grader", description: "Auto-grade your essays & reports" },
+  { icon: Send, name: "Essay Grader", description: "Auto-grade your essays & reports" },
 ];
 
 export default function Dashboard() {
   const { user } = useAuth();
-  // Avatar logic - using Supabase user properties
-  const firstName = user?.user_metadata?.display_name?.split(" ")[0]
-    || user?.user_metadata?.full_name?.split(" ")[0]
+  // Avatar logic
+  const firstName = user?.displayName?.split(" ")[0]
     || user?.email?.split("@")[0]?.replace(/\./g, '').toUpperCase();
 
   // BEST SCORE STATE (NEW)
@@ -114,7 +92,7 @@ export default function Dashboard() {
               <div className="text-xs text-yellow-100 mt-1 font-semibold">
                 Your highest AI Skill Readiness Test result
               </div>
-              <span className="block text-xs text-yellow-300 mt-2">Assessment feature coming soon</span>
+              <a href="/assessment/skill-test" className="block text-xs text-yellow-300 underline underline-offset-4 mt-2 hover:text-yellow-200 transition">Take Assessment</a>
             </CardContent>
           </Card>
         </div>

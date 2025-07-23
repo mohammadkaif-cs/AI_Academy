@@ -273,9 +273,9 @@ const GenerativeAI = () => {
             <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white">
               Start Generative AI Track
             </Button>
-            <Link to="/dashboard">
+            <Link to="/assessment">
               <Button size="lg" variant="outline">
-                Go to Dashboard
+                Assess My Skills First
               </Button>
             </Link>
           </div>

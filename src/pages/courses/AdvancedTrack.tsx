@@ -286,9 +286,9 @@ const AdvancedTrack = () => {
             <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
               Start Advanced Track
             </Button>
-            <Link to="/dashboard">
+            <Link to="/contact">
               <Button size="lg" variant="outline">
-                Go to Dashboard
+                Speak with an Expert
               </Button>
             </Link>
           </div>

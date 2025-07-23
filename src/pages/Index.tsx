@@ -19,7 +19,7 @@ const Index = () => {
     const firstName = emailPrefix.replace(/\./g, '').toLowerCase();
     return firstName.charAt(0).toUpperCase() + firstName.slice(1);
   };
-  const firstName = user?.user_metadata?.display_name || user?.user_metadata?.full_name || getFirstName(user?.email || '');
+  const firstName = user?.displayName || getFirstName(user?.email || '');
   return <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
       
@@ -40,9 +40,9 @@ const Index = () => {
                     Continue Learning
                   </Button>
                 </Link>
-                <Link to="/courses">
+                <Link to="/assessment">
                   <Button size="lg" variant="outline" className="px-8 py-3 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium">
-                    Browse Courses
+                    Take Assessment
                   </Button>
                 </Link>
               </div>
@@ -261,9 +261,9 @@ const Index = () => {
                     Go to Dashboard
                   </Button>
                 </Link>
-                <Link to="/courses">
+                <Link to="/assessment">
                   <Button size="lg" variant="outline" className="px-8 py-3 border-gray-400 text-gray-300 hover:bg-gray-800 rounded-lg font-medium">
-                    Browse Courses
+                    Take Assessment
                   </Button>
                 </Link>
               </div>

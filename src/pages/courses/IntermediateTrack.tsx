@@ -493,9 +493,9 @@ const IntermediateTrack = () => {
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
               Start Intermediate Track
             </Button>
-            <Link to="/dashboard">
+            <Link to="/readiness-test">
               <Button size="lg" variant="outline">
-                Go to Dashboard
+                Team Readiness Test
               </Button>
             </Link>
           </div>

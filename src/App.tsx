@@ -14,15 +14,17 @@ import GenerativeAI from "./pages/courses/GenerativeAI";
 import NLP from "./pages/courses/NLP";
 import ComputerVision from "./pages/courses/ComputerVision"; // updated import path
 import About from "./pages/About";
+import Assessment from "./pages/Assessment";
+import ReadinessTest from "./pages/ReadinessTest";
+import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
-import Assessment from "./pages/Assessment";
 import NotFound from "./pages/NotFound";
 import * as session from "@/utils/session";
 import { useEffect } from "react";
 import Chatbot from "./pages/Chatbot";
 import Profile from "./pages/Profile"; // ADD THIS
-
+import SkillAssessmentTest from "./pages/assessment/SkillAssessmentTest";
 import Projects from "./pages/Projects";
 
 // Now BrowserRouter is wrapped in AuthProvider
@@ -76,16 +78,8 @@ const App = () => {
                 {/* Public routes */}
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/courses" element={
-                  <ProtectedRoute>
-                    <Courses />
-                  </ProtectedRoute>
-                } />
-                <Route path="/assessment" element={
-                  <ProtectedRoute>
-                    <Assessment />
-                  </ProtectedRoute>
-                } />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/courses" element={<Courses />} />
                 
                 {/* Protected routes */}
                 <Route path="/courses/beginner" element={
@@ -116,6 +110,21 @@ const App = () => {
                 <Route path="/courses/computer-vision" element={
                   <ProtectedRoute>
                     <ComputerVision />
+                  </ProtectedRoute>
+                } />
+                <Route path="/assessment" element={
+                  <ProtectedRoute>
+                    <Assessment />
+                  </ProtectedRoute>
+                } />
+                <Route path="/assessment/skill-test" element={
+                  <ProtectedRoute>
+                    <SkillAssessmentTest />
+                  </ProtectedRoute>
+                } />
+                <Route path="/readiness-test" element={
+                  <ProtectedRoute>
+                    <ReadinessTest />
                   </ProtectedRoute>
                 } />
                 <Route path="/dashboard" element={

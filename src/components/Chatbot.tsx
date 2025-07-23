@@ -83,47 +83,5 @@ export const Chatbot = () => {
       handleSendMessage();
     }
   };
-  return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <Card className="bg-card border border-border shadow-sm">
-        <CardHeader>
-          <CardTitle className="text-lg font-semibold text-foreground">AI Learning Assistant</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="h-96 overflow-y-auto space-y-3 p-4 bg-muted/30 rounded-lg">
-            {messages.map((message) => (
-              <div key={message.id} className={cn("flex", message.isUser ? "justify-end" : "justify-start")}>
-                <div className={cn("max-w-xs lg:max-w-md px-4 py-2 rounded-lg", message.isUser ? "bg-primary text-primary-foreground" : "bg-background border text-foreground")}>
-                  <p className="text-sm">{message.text}</p>
-                  <p className="text-xs opacity-70 mt-1">{message.timestamp.toLocaleTimeString()}</p>
-                </div>
-              </div>
-            ))}
-            {isTyping && (
-              <div className="flex justify-start">
-                <div className="bg-background border text-foreground max-w-xs lg:max-w-md px-4 py-2 rounded-lg">
-                  <p className="text-sm">AI is typing...</p>
-                </div>
-              </div>
-            )}
-          </div>
-          
-          <div className="flex flex-wrap gap-2 mb-4">
-            {quickActions.map((action, index) => (
-              <Button key={index} variant="outline" size="sm" onClick={() => handleQuickAction(action)} className="text-xs">
-                {action}
-              </Button>
-            ))}
-          </div>
-          
-          <div className="flex gap-2">
-            <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyPress={handleKeyPress} placeholder="Ask me anything about AI courses..." className="flex-1" />
-            <Button onClick={handleSendMessage} disabled={!inputValue.trim()}>
-              Send
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
+  return;
 };
