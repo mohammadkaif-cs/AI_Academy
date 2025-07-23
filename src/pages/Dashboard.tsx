@@ -16,9 +16,9 @@ import {
   ArrowRight,
   Bookmark,
   PlayCircle,
-  Bot,
+  MessageCircle,
   Zap,
-  Send
+  Mail
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -39,9 +39,9 @@ const recentActivity = [
 ];
 
 const aiTools = [
-  { icon: Bot, name: "Academy Chatbot", description: "Get quick AI help and answers" },
+  { icon: MessageCircle, name: "Academy Chatbot", description: "Get quick AI help and answers" },
   { icon: Zap, name: "Code Assistant", description: "Generate & debug code" },
-  { icon: Send, name: "Essay Grader", description: "Auto-grade your essays & reports" },
+  { icon: Mail, name: "Essay Grader", description: "Auto-grade your essays & reports" },
 ];
 
 export default function Dashboard() {
