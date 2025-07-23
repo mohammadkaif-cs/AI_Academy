@@ -25,9 +25,8 @@ const aiTools = [
 
 export default function Dashboard() {
   const { user } = useAuth();
-  // Avatar logic
-  const firstName = user?.displayName?.split(" ")[0]
-    || user?.email?.split("@")[0]?.replace(/\./g, '').toUpperCase();
+  // Avatar logic - Supabase user doesn't have displayName, use email
+  const firstName = user?.email?.split("@")[0]?.replace(/\./g, '').toUpperCase() || 'User';
 
   // BEST SCORE STATE (NEW)
   const [bestAssessmentScore, setBestAssessmentScore] = useState<number>(0);

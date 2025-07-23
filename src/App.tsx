@@ -15,7 +15,7 @@ import NLP from "./pages/courses/NLP";
 import ComputerVision from "./pages/courses/ComputerVision"; // updated import path
 import About from "./pages/About";
 import Assessment from "./pages/Assessment";
-import ReadinessTest from "./pages/ReadinessTest";
+
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
@@ -120,11 +120,6 @@ const App = () => {
                 <Route path="/assessment/skill-test" element={
                   <ProtectedRoute>
                     <SkillAssessmentTest />
-                  </ProtectedRoute>
-                } />
-                <Route path="/readiness-test" element={
-                  <ProtectedRoute>
-                    <ReadinessTest />
                   </ProtectedRoute>
                 } />
                 <Route path="/dashboard" element={

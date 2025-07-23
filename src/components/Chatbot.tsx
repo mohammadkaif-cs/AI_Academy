@@ -83,5 +83,66 @@ export const Chatbot = () => {
       handleSendMessage();
     }
   };
-  return;
+  return (
+    <div className="flex flex-col h-full bg-background">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.map((message) => (
+          <div
+            key={message.id}
+            className={cn(
+              "flex w-full",
+              message.isUser ? "justify-end" : "justify-start"
+            )}
+          >
+            <div
+              className={cn(
+                "max-w-[80%] rounded-lg p-3 text-sm",
+                message.isUser
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground"
+              )}
+            >
+              {message.text}
+            </div>
+          </div>
+        ))}
+        {isTyping && (
+          <div className="flex justify-start">
+            <div className="bg-muted text-muted-foreground rounded-lg p-3 text-sm">
+              AI is typing...
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <div className="p-4 border-t">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {quickActions.map((action, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              size="sm"
+              onClick={() => handleQuickAction(action)}
+              className="text-xs"
+            >
+              {action}
+            </Button>
+          ))}
+        </div>
+        
+        <div className="flex space-x-2">
+          <Input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message..."
+            className="flex-1"
+          />
+          <Button onClick={handleSendMessage} disabled={!inputValue.trim()}>
+            Send
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 };

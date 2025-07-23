@@ -47,8 +47,8 @@ export default function ProfilePage() {
     } else if (user) {
       setProfile(prev => ({
         ...prev,
-        fullName: user.displayName || "",
-        photoUrl: user.photoURL || "",
+        fullName: user.email?.split('@')[0] || "",
+        photoUrl: "",
         email: user.email || "",
       }));
     }
