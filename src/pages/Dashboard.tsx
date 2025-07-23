@@ -15,12 +15,16 @@ import {
   Target,
   ArrowRight,
   Bookmark,
-  PlayCircle
+  PlayCircle,
+  Bot,
+  Zap,
+  Send
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import DashboardLayout from '@/components/DashboardLayout';
 
 const statsData = [
   { name: 'Courses', value: 3 },
