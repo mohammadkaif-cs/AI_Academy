@@ -6,9 +6,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import React, { useEffect, useState } from 'react';
 
 const statsData = [
-  { name: 'Courses', value: 3 },
-  { name: 'Certs', value: 1 },
-  { name: 'Progress', value: 67 },
+  { name: 'Courses', value: 0 },
+  { name: 'Certs', value: 0 },
+  { name: 'Progress', value: 0 },
 ];
 
 const recentActivity = [
@@ -37,116 +37,135 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className="relative min-h-screen w-full bg-gradient-to-br from-[#141B23] via-[#191F28] to-[#1c212b]">
-        {/* Semi-transparent glass overlay for depth */}
-        <div className="absolute inset-0 z-0 bg-white/5 backdrop-blur-md" />
-        {/* Header with User Avatar and Welcome */}
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between pt-2 md:pt-2 pb-6 px-2 sm:px-0 mb-6">
+      <div className="w-full min-h-screen bg-background">
+        {/* Header with User Welcome */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between pt-2 pb-8 mb-8">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-2xl font-bold text-[#1b263b] shadow-md border-2 border-accent/50">
+            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-3xl font-bold text-primary shadow-lg border-2 border-primary/20">
               {firstName?.charAt(0)?.toUpperCase() || "A"}
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-1">
-                Welcome, <span className="bg-clip-text text-transparent bg-gradient-to-tr from-accent to-cyan-300">{firstName}</span>
-              </div>
-              <div className="text-sm text-blue-200 font-semibold drop-shadow-sm">
-                Glad to see you back in <span className="font-bold text-accent/90">AK Academy</span>
-              </div>
+              <h1 className="text-3xl font-bold text-foreground tracking-tight mb-2">
+                Welcome back, <span className="text-primary">{firstName}</span>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Continue your AI learning journey with <span className="font-semibold text-primary">AK Academy</span>
+              </p>
             </div>
           </div>
         </div>
-        {/* Stats row: removed Progress card, now 3 columns */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          {/* Card 1 */}
-          <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
-            <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
-              <CardTitle className="text-base font-semibold text-accent tracking-wide">Courses Enrolled</CardTitle>
-              <BookOpen className="h-7 w-7 text-accent drop-shadow-glow" />
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* Courses Enrolled Card */}
+          <Card className="hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/20">
+            <CardHeader className="flex flex-row items-center justify-between pb-3">
+              <CardTitle className="text-base font-semibold text-muted-foreground">Courses Enrolled</CardTitle>
+              <BookOpen className="h-6 w-6 text-primary" />
             </CardHeader>
-            <CardContent className="px-6 pb-6 pt-1">
-              <div className="text-[2rem] sm:text-[2.4rem] font-black text-white drop-shadow-sm">3</div>
-              <div className="text-xs text-accent/80 mt-1 font-semibold">+2 from last month</div>
+            <CardContent className="pt-0">
+              <div className="text-4xl font-bold text-foreground">0</div>
+              <p className="text-sm text-muted-foreground mt-1">Ready to start learning</p>
             </CardContent>
           </Card>
-          {/* Card 2 */}
-          <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
-            <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
-              <CardTitle className="text-base font-semibold text-green-300 tracking-wide">Certificates</CardTitle>
-              <Award className="h-7 w-7 text-green-200 drop-shadow-glow" />
+
+          {/* Certificates Card */}
+          <Card className="hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/20">
+            <CardHeader className="flex flex-row items-center justify-between pb-3">
+              <CardTitle className="text-base font-semibold text-muted-foreground">Certificates</CardTitle>
+              <Award className="h-6 w-6 text-primary" />
             </CardHeader>
-            <CardContent className="px-6 pb-6 pt-1">
-              <div className="text-[2rem] sm:text-[2.4rem] font-black text-white">1</div>
-              <div className="text-xs text-green-200 mt-1 font-semibold">Beginner AI completed</div>
+            <CardContent className="pt-0">
+              <div className="text-4xl font-bold text-foreground">0</div>
+              <p className="text-sm text-muted-foreground mt-1">Complete courses to earn certificates</p>
             </CardContent>
           </Card>
-          {/* Best Score Card */}
-          <Card className="bg-[#191E28]/70 border-none shadow-2xl backdrop-blur-xl hover:scale-[1.03] transition-all duration-150 rounded-2xl p-0 glass">
-            <CardHeader className="flex flex-row items-center justify-between px-6 pt-5 pb-2">
-              <CardTitle className="text-base font-semibold text-yellow-300 tracking-wide">Best Assessment Score</CardTitle>
-              <Star className="h-7 w-7 text-yellow-200 drop-shadow-glow" />
+
+          {/* Best Assessment Score Card */}
+          <Card className="hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/20">
+            <CardHeader className="flex flex-row items-center justify-between pb-3">
+              <CardTitle className="text-base font-semibold text-muted-foreground">Best Assessment Score</CardTitle>
+              <Star className="h-6 w-6 text-primary" />
             </CardHeader>
-            <CardContent className="px-6 pb-6 pt-1">
-              <div className="text-[2rem] sm:text-[2.4rem] font-black text-white drop-shadow-sm">{bestAssessmentScore}%</div>
-              <div className="text-xs text-yellow-100 mt-1 font-semibold">
-                Your highest AI Skill Readiness Test result
-              </div>
-              <a href="/assessment/skill-test" className="block text-xs text-yellow-300 underline underline-offset-4 mt-2 hover:text-yellow-200 transition">Take Assessment</a>
+            <CardContent className="pt-0">
+              <div className="text-4xl font-bold text-foreground">{bestAssessmentScore}%</div>
+              <p className="text-sm text-muted-foreground mt-1">Take your first assessment</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* Main Panels */}
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {/* Courses */}
-          <Card className="bg-[#202532]/75 border-none shadow-lg backdrop-blur-2xl rounded-xl transition hover:scale-[1.02]">
-            <CardHeader className="px-6 pt-6 pb-2">
-              <CardTitle className="text-lg font-bold text-accent">My Courses</CardTitle>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {/* My Courses */}
+          <Card className="hover:shadow-lg transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                My Courses
+              </CardTitle>
             </CardHeader>
-            <CardContent className="px-6 pb-6 pt-2">
-              <ul className="space-y-2 text-white font-medium">
-                <li>Intermediate AI <span className="ml-2 text-xs text-cyan-400/80">(60% completed)</span></li>
-                <li>Generative AI <span className="ml-2 text-xs text-cyan-400/80">(20% completed)</span></li>
-                <li>Beginner Track <span className="ml-2 text-xs text-green-400">(Completed)</span></li>
-              </ul>
-              <a href="/courses" className="inline-block mt-4 text-xs text-cyan-200/90 hover:text-accent underline underline-offset-4 transition">Browse All Courses</a>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="text-center py-8">
+                  <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground mb-4">No courses enrolled yet</p>
+                  <a 
+                    href="/courses" 
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+                  >
+                    Browse Courses
+                  </a>
+                </div>
+              </div>
             </CardContent>
           </Card>
-          {/* Activity */}
-          <Card className="bg-[#202532]/75 border-none shadow-lg backdrop-blur-2xl rounded-xl transition hover:scale-[1.02]">
-            <CardHeader className="px-6 pt-6 pb-2">
-              <CardTitle className="text-lg font-bold text-purple-200">Recent Activity</CardTitle>
+
+          {/* Recent Activity */}
+          <Card className="hover:shadow-lg transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-primary" />
+                Recent Activity
+              </CardTitle>
             </CardHeader>
-            <CardContent className="px-6 pb-6 pt-2">
-              <ul className="space-y-2 text-white/90 font-medium">
-                {recentActivity.map((act) => (
-                  <li key={act.label} className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse mr-1" />
-                    <span>{act.label}</span>
-                    <span className="ml-auto text-xs text-purple-100">{act.date}</span>
-                  </li>
-                ))}
-              </ul>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="text-center py-8">
+                  <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">Your recent activities will appear here</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
+
           {/* AI Tools */}
-          <Card className="bg-[#202532]/75 border-none shadow-lg backdrop-blur-2xl rounded-xl transition hover:scale-[1.02]">
-            <CardHeader className="px-6 pt-6 pb-2">
-              <CardTitle className="text-lg font-bold text-green-200">AI Tools</CardTitle>
+          <Card className="hover:shadow-lg transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold text-foreground flex items-center gap-2">
+                <Zap className="h-5 w-5 text-primary" />
+                AI Tools
+              </CardTitle>
             </CardHeader>
-            <CardContent className="px-6 pb-6 pt-2">
-              <ul className="space-y-2">
+            <CardContent>
+              <div className="space-y-4">
                 {aiTools.map((tool) => (
-                  <li key={tool.name} className="flex gap-3 items-center">
-                    <tool.icon className="w-7 h-7 text-accent drop-shadow-[0_0_6px_rgba(44,255,218,0.15)]" />
+                  <div key={tool.name} className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                    <tool.icon className="h-8 w-8 text-primary" />
                     <div>
-                      <div className="font-semibold text-white">{tool.name}</div>
-                      <div className="text-xs text-green-100">{tool.description}</div>
+                      <div className="font-semibold text-foreground">{tool.name}</div>
+                      <div className="text-sm text-muted-foreground">{tool.description}</div>
                     </div>
-                  </li>
+                  </div>
                 ))}
-              </ul>
-              <a href="/chatbot" className="inline-block mt-4 text-xs text-green-200/90 hover:text-accent underline underline-offset-4 transition">Try the Chatbot</a>
+                <div className="pt-2">
+                  <a 
+                    href="/chatbot" 
+                    className="text-sm text-primary hover:underline"
+                  >
+                    Try the Chatbot →
+                  </a>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
